@@ -1,0 +1,105 @@
+.home-container {
+  padding: 40px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hero-section {
+  display: flex;
+  border-radius: 30px;
+  overflow: hidden;
+  min-height: 700px;
+}
+
+.hero-content {
+  flex: 1;
+  background-color: #f03f3b;
+  color: #ffffff;
+  padding: 120px 60px 60px; /* верхній відступ залишає місце для хедера */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-content h1 {
+  font-size: 70px;
+  line-height: 1.05;
+  font-weight: 500;
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 60px;
+  opacity: 0.9;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #ffffff;
+  color: #f03f3b;
+  padding: 18px 45px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  width: fit-content;
+  transition: opacity 0.2s;
+}
+
+.hero-button:hover {
+  opacity: 0.9;
+}
+
+.hero-image-container {
+  flex: 1;
+  background-image: url("../images/hero-baby.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero-badge {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  background-color: #ffffff;
+  padding: 20px 24px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* м'яка тінь для об'єму */
+}
+
+.badge-icon {
+  width: 54px;
+  height: 54px;
+  background-color: #f03f3b; /* ваш брендовий червоний колір */
+  color: #ffffff;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.badge-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.badge-title {
+  font-size: 14px;
+  color: #8a8a8a; /* світліший текст для підпису */
+  margin-bottom: 4px;
+}
+
+.badge-count {
+  font-size: 24px;
+  font-weight: 700;
+  color: #102831; /* темний брендовий колір */
+}
