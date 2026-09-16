@@ -1,5 +1,5 @@
 .home-container {
-  padding: 40px;
+  padding: 32px;
   max-width: 1440px;
   margin: 0 auto;
 }
@@ -8,54 +8,90 @@
   display: flex;
   border-radius: 30px;
   overflow: hidden;
-  min-height: 700px;
+  min-height: 736px;
 }
 
 .hero-content {
-  flex: 1;
+  width: 50%;
   background-color: #f03f3b;
   color: #ffffff;
-  padding: 120px 60px 60px; /* верхній відступ залишає місце для хедера */
+  padding: 251px 64px 163px 96px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .hero-content h1 {
-  font-size: 70px;
-  line-height: 1.05;
   font-weight: 500;
-  margin-bottom: 20px;
-  max-width: 500px;
+  font-size: 70px;
+
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #fbfbfb;
+
+  margin-bottom: 28px;
 }
 
 .hero-content p {
-  font-size: 18px;
-  margin-bottom: 60px;
-  opacity: 0.9;
+  font-weight: 400;
+  font-size: 28px;
+
+  line-height: 1.07;
+  letter-spacing: -0.02em;
+  color: #fbfbfb;
+
+  margin-bottom: 64px;
 }
 
 .hero-button {
   display: inline-flex;
   align-items: center;
-  gap: 15px;
-  background-color: #ffffff;
-  color: #f03f3b;
-  padding: 18px 45px;
+  gap: 10px;
+  background-color: transparent;
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  width: 230px;
+  height: 60px;
+
+  padding: 18px 50px;
   border-radius: 30px;
-  font-size: 18px;
+
   font-weight: 500;
+  font-size: 20px;
+
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
   text-decoration: none;
-  width: fit-content;
+
   transition: opacity 0.2s;
 }
 
-.hero-button:hover {
-  opacity: 0.9;
+.hero-button .icon-right {
+  display: none;
+}
+
+.hero-button .icon-up-right {
+  display: block;
+  width: 14px;
+  height: 16px;
+  fill: #fbfbfb;
+}
+
+.hero-button:hover .icon-up-right,
+.hero-button:focus .icon-up-right {
+  display: none;
+}
+
+.hero-button:hover .icon-right,
+.hero-button:focus .icon-right {
+  display: block;
+  width: 20px;
+  height: 15px;
+  fill: #fbfbfb;
 }
 
 .hero-image-container {
-  flex: 1;
+  width: 50%;
   background-image: url("../images/hero-baby.jpg");
   background-size: cover;
   background-position: center;
@@ -66,20 +102,19 @@
   position: absolute;
   bottom: 50px;
   right: 50px;
-  background-color: #ffffff;
-  padding: 20px 24px;
+  background-color: #fbfbfb;
+  padding: 32px;
   border-radius: 20px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* м'яка тінь для об'єму */
+  gap: 28px;
 }
 
 .badge-icon {
   width: 54px;
   height: 54px;
-  background-color: #f03f3b; /* ваш брендовий червоний колір */
-  color: #ffffff;
+  background-color: #f03f3b;
+  fill: #fbfbfb;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -93,13 +128,14 @@
 }
 
 .badge-title {
-  font-size: 14px;
-  color: #8a8a8a; /* світліший текст для підпису */
-  margin-bottom: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(17, 16, 28, 0.5);
+  margin-bottom: 6px;
 }
 
 .badge-count {
-  font-size: 24px;
   font-weight: 700;
-  color: #102831; /* темний брендовий колір */
+  font-size: 24px;
+  color: #11101c;
 }

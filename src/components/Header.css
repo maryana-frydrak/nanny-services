@@ -1,0 +1,120 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 52px 96px 20px;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* Стилі для головної сторінки (повністю прозорий поверх червоного фону) */
+.header.home {
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Легка напівпрозора лінія знизу, якщо є в макеті */
+}
+
+/* Стилі для інших внутрішніх сторінок (якщо треба білий фон або інший колір) */
+.header.inner {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.header-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff; /* На головній зазвичай білий текст */
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.header.inner .header-logo {
+  color: #111111; /* На внутрішніх сторінках темний */
+}
+
+.header-nav {
+  display: flex;
+  gap: 32px;
+  margin: 0 auto;
+}
+
+.header-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: opacity 0.2s ease;
+}
+
+.header-nav a:hover {
+  opacity: 0.8;
+}
+
+.header.inner .header-nav a {
+  color: #111111;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Кнопки авторизації */
+.auth-buttons {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-login,
+.btn-register,
+.btn-logout {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-login {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.btn-register {
+  background: #f03f3b; /* Ваш акцентний колір з макету */
+  border: none;
+  color: #ffffff;
+}
+
+.header.inner .btn-login {
+  border-color: #111111;
+  color: #111111;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #ffffff;
+}
+
+.header.inner .user-menu {
+  color: #111111;
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.header.inner .btn-logout {
+  border-color: #111111;
+  color: #111111;
+}
