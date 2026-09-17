@@ -25,30 +25,31 @@ export default function Header({
         Nanny.Services
       </Link>
 
-      <nav className="header-nav">
-        <Link to="/">Home</Link>
-        <Link to="/nannies">Nannies</Link>
-        {isLoggedIn && <Link to="/favorites">Favorites</Link>}
-      </nav>
-
-      <div className="header-actions">
-        {isLoggedIn ? (
-          <div className="user-menu">
-            <span className="user-email">{userEmail}</span>
-            <button onClick={onLogout} className="btn-logout">
-              Log out
-            </button>
-          </div>
-        ) : (
-          <div className="auth-buttons">
-            <button onClick={onOpenLogin} className="btn-login">
-              Log in
-            </button>
-            <button onClick={onOpenRegister} className="btn-register">
-              Registration
-            </button>
-          </div>
-        )}
+      <div className="header-right">
+        <nav className="header-nav">
+          <Link to="/">Home</Link>
+          <Link to="/nannies">Nannies</Link>
+          {isLoggedIn && <Link to="/favorites">Favorites</Link>}
+        </nav>
+        <div className="header-actions">
+          {isLoggedIn ? (
+            <div className="user-menu">
+              <span className="user-email">{userEmail}</span>
+              <button onClick={onLogout} className="btn-logout">
+                Log out
+              </button>
+            </div>
+          ) : (
+            <div className="auth-buttons">
+              <button onClick={onOpenLogin} className="btn-login">
+                Log in
+              </button>
+              <button onClick={onOpenRegister} className="btn-register">
+                Registration
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
