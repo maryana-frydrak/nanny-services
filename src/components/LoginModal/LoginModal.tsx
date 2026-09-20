@@ -1,6 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import "./LoginModal.css";
+import { loginUser } from "../../services/auth";
 
+const schema = yup
+  .object({
+    email: yup
+      .string()
+      .required("Email is required")
+      .email("Please enter a valid email"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters"),
+  })
+  .required();
+
+type LoginFormData = yup.InferType<typeof schema>;
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -13,19 +31,47 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   onLogin,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: yupResolver(schema),
+  });
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    onLogin();
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      await loginUser(data.email, data.password);
+      onLogin();
+      reset();
+      onClose();
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Login error:", err.message);
+      } else {
+        console.error("An unexpected error occurred during login");
+      }
+    }
   };
 
   return (
@@ -47,26 +93,19 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           continue your babysitter search.
         </p>
 
-        <form className="modal-form" onSubmit={handleSubmit}>
+        <form className="modal-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-wrapper">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
+            <input type="email" placeholder="Email" {...register("email")} />
+            {errors.email && (
+              <span className="error-text">{errors.email.message}</span>
+            )}
           </div>
 
           <div className="input-wrapper">
             <input
               type={showPassword ? "text" : "password"}
-              name="password"
               placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
+              {...register("password")}
             />
             <button
               type="button"
@@ -79,6 +118,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                 />
               </svg>
             </button>
+            {errors.password && (
+              <span className="error-text">{errors.password.message}</span>
+            )}
           </div>
 
           <button type="submit" className="modal-submit-btn">

@@ -7,7 +7,7 @@ import Header from "./components/Header/Header";
 import { useState } from "react";
 import { LoginModal } from "./components/LoginModal/LoginModal";
 import RegistrationModal from "./components/RegistrationModal/RegistrationModal";
-import LogoutModal from "./components/LogOutModal/LogOutModal";
+import LogoutModal from "./components/LogoutModal/LogoutModal";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,6 +37,7 @@ function App() {
       <RegistrationModal
         isOpen={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
+        onRegister={() => setIsLoggedIn(true)}
       />
 
       <LogoutModal

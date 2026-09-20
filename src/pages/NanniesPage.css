@@ -1,0 +1,21 @@
+.nannies-page {
+  padding: 40px 0;
+  background-color: #f3f3f3; /* або колір фону за макетом Figma */
+  min-height: calc(100vh - 80px);
+}
+
+.container {
+  max-width: 1184px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nannies-header-section {
+  margin-bottom: 32px;
+}
+
+.nannies-header-section h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #111;
+}

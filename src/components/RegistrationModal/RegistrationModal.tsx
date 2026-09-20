@@ -1,33 +1,67 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { registerUser } from "../../services/auth";
 import "./RegistrationModal.css";
 
 interface RegistrationModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onRegister: () => void;
 }
+
+const schema = yup
+  .object({
+    name: yup.string().required("Name is required"),
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup
+      .string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
+  })
+  .required();
+
+type FormData = yup.InferType<typeof schema>;
 
 const RegistrationModal: React.FC<RegistrationModalProps> = ({
   isOpen,
   onClose,
+  onRegister,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
+  const [serverError, setServerError] = useState<string | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
   });
 
   if (!isOpen) return null;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const onSubmit = async (data: FormData) => {
+    try {
+      setServerError(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Register data:", formData);
+      await registerUser(data.email, data.password);
 
-    onClose();
+      console.log("User registered successfully");
+      onRegister();
+      reset();
+      onClose();
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Registration error:", err.message);
+        setServerError(err.message);
+      } else {
+        console.error("Registration error:", err);
+        setServerError("An unexpected error occurred");
+      }
+    }
   };
 
   return (
@@ -50,37 +84,24 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
           information.
         </p>
 
-        <form className="modal-form" onSubmit={handleSubmit}>
+        <form className="modal-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-wrapper">
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+            <input type="text" placeholder="Name" {...register("name")} />
+            {errors.name && <p className="error-text">{errors.name.message}</p>}
           </div>
 
           <div className="input-wrapper">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
+            <input type="email" placeholder="Email" {...register("email")} />
+            {errors.email && (
+              <p className="error-text">{errors.email.message}</p>
+            )}
           </div>
 
           <div className="input-wrapper password-wrapper">
             <input
               type={showPassword ? "text" : "password"}
-              name="password"
               placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
+              {...register("password")}
             />
             <button
               type="button"
@@ -93,10 +114,21 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 />
               </svg>
             </button>
+            {errors.password && (
+              <p className="error-text">{errors.password.message}</p>
+            )}
           </div>
 
-          <button type="submit" className="modal-submit-btn">
-            Sign Up
+          {serverError && (
+            <p className="error-text server-error">{serverError}</p>
+          )}
+
+          <button
+            type="submit"
+            className="modal-submit-btn"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Signing up..." : "Sign Up"}
           </button>
         </form>
       </div>
