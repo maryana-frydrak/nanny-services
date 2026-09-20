@@ -39,16 +39,12 @@ const LogoutModal: React.FC<LogoutModalProps> = ({
         <div className="logout-buttons-wrapper">
           <button
             type="button"
-            className="logout-btn confirm-btn"
+            className="logout-confirm-btn"
             onClick={onConfirm}
           >
             Log out
           </button>
-          <button
-            type="button"
-            className="logout-btn cancel-btn"
-            onClick={onClose}
-          >
+          <button type="button" className="logout-cancel-btn" onClick={onClose}>
             Cancel
           </button>
         </div>
