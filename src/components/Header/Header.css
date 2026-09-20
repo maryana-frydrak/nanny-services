@@ -16,7 +16,6 @@
   border-bottom: 1px solid rgba(251, 251, 251, 0.4);
 }
 
-/* Стилі для інших внутрішніх сторінок (якщо треба білий фон або інший колір) */
 .header.inner {
   background-color: #f03f3b;
 }
@@ -69,8 +68,17 @@
   opacity: 0.6;
 }
 
-.header.inner .header-nav a {
-  color: #111111;
+.header.inner .header-nav a.active::after,
+.header.inner .header-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: #fbfbfb;
+  border-radius: 50%;
 }
 
 .header-actions {
@@ -126,9 +134,18 @@
   background-color: #fbfbfb;
 }
 
+.header.inner .btn-register {
+  border-color: 1px solid rgba(251, 251, 251, 0.4);
+}
+
 .header.inner .btn-login {
-  border-color: #111111;
-  color: #111111;
+  border-color: rgba(251, 251, 251, 0.4);
+  color: #fbfbfb;
+}
+
+.header.inner .btn-login:hover,
+.header.inner .btn-login:focus {
+  background-color: rgba(240, 63, 59, 0.2);
 }
 
 .user-menu {

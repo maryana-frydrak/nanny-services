@@ -73,9 +73,47 @@
   padding: 16px 18px;
   border: 1px solid rgba(17, 16, 28, 0.1);
   border-radius: 12px;
+  background-color: transparent;
 
   outline: none;
   box-sizing: border-box;
+  transition: border-color 0.3s ease;
+
+  font-weight: 400;
+  font-size: 16px;
+
+  line-height: 1.25;
+  color: #11101c;
+}
+
+.input-wrapper input:-webkit-autofill,
+.input-wrapper input:-webkit-autofill:hover,
+.input-wrapper input:-webkit-autofill:focus,
+.input-wrapper input:not(:placeholder-shown) {
+  -webkit-text-fill-color: #11101c !important;
+  -webkit-box-shadow: none !important;
+  background-color: rgba(240, 63, 59, 0.2) !important;
+  border: 1px solid #11101c !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.input-wrapper input:hover,
+.input-wrapper input:focus {
+  border: 1px solid #11101c;
+  background-color: rgba(240, 63, 59, 0.2);
+}
+
+.error-text {
+  font-weight: 400;
+  font-size: 12px;
+
+  line-height: 1.25;
+  color: #e03636;
+
+  opacity: 0.8;
+  margin-top: 4px;
+  margin-left: 18px;
+  display: block;
 }
 
 .toggle-password-btn {
