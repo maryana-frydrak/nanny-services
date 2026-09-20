@@ -121,6 +121,17 @@
   border: 1px solid #f03f3b;
 }
 
+.header.inner .btn-login {
+  border-color: rgba(251, 251, 251, 0.4);
+  color: #fbfbfb;
+}
+
+.header.inner .btn-login:hover,
+.header.inner .btn-login:focus {
+  color: #f03f3b;
+  background-color: #fbfbfb;
+}
+
 .btn-register {
   background-color: #f03f3b;
   border: none;
@@ -135,17 +146,7 @@
 }
 
 .header.inner .btn-register {
-  border-color: 1px solid rgba(251, 251, 251, 0.4);
-}
-
-.header.inner .btn-login {
-  border-color: rgba(251, 251, 251, 0.4);
-  color: #fbfbfb;
-}
-
-.header.inner .btn-login:hover,
-.header.inner .btn-login:focus {
-  background-color: rgba(240, 63, 59, 0.2);
+  border: 1px solid rgba(251, 251, 251, 0.4);
 }
 
 .user-menu {
@@ -156,7 +157,7 @@
 }
 
 .header.inner .user-menu {
-  color: #111111;
+  color: #fbfbfb;
 }
 
 .btn-logout {
@@ -173,6 +174,6 @@
 }
 
 .header.inner .btn-logout {
-  border-color: #111111;
-  color: #111111;
+  border-color: rgba(251, 251, 251, 0.4);
+  color: #fbfbfb;
 }
