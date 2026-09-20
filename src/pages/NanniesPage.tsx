@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchNannies } from "../services/nannies";
 import type { Nanny } from "../types/nanny";
 import "./NanniesPage.css";
+import { NannyCard } from "../components/NannyCard/NannyCard";
 
 export default function NanniesPage() {
   const [nannies, setNannies] = useState<Nanny[]>([]);
@@ -30,7 +31,11 @@ export default function NanniesPage() {
           {loading ? (
             <p>Завантаження нянь...</p>
           ) : nannies.length > 0 ? (
-            <p>Успішно завантажено нянь: {nannies.length}. Дивіться консоль!</p>
+            <div className="nannies-list">
+              {nannies.map((nanny) => (
+                <NannyCard key={nanny.id || nanny.name} nanny={nanny} />
+              ))}
+            </div>
           ) : (
             <p>Нянь не знайдено в базі даних.</p>
           )}
