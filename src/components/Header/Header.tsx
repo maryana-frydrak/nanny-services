@@ -1,9 +1,9 @@
 import "./Header.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 interface HeaderProps {
   isLoggedIn: boolean;
-  userEmail: string;
+  userName: string;
   onOpenLogin: () => void;
   onOpenRegister: () => void;
   onLogout: () => void;
@@ -11,7 +11,7 @@ interface HeaderProps {
 
 export default function Header({
   isLoggedIn,
-  userEmail,
+  userName,
   onOpenLogin,
   onOpenRegister,
   onLogout,
@@ -27,14 +27,43 @@ export default function Header({
 
       <div className="header-right">
         <nav className="header-nav">
-          <Link to="/">Home</Link>
-          <Link to="/nannies">Nannies</Link>
-          {isLoggedIn && <Link to="/favorites">Favorites</Link>}
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/nannies"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Nannies
+          </NavLink>
+          {isLoggedIn && (
+            <NavLink
+              to="/favorites"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              Favorites
+            </NavLink>
+          )}
         </nav>
         <div className="header-actions">
           {isLoggedIn ? (
             <div className="user-menu">
-              <span className="user-email">{userEmail}</span>
+              <div className="user-avatar-wrapper">
+                <svg width="24" height="24">
+                  <use href="/icons.svg#icon-user" />
+                </svg>
+              </div>
+              <span className="user-name">{userName}</span>
               <button onClick={onLogout} className="btn-logout">
                 Log out
               </button>

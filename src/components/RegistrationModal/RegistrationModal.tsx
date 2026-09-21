@@ -8,7 +8,7 @@ import "./RegistrationModal.css";
 interface RegistrationModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onRegister: () => void;
+  onRegister: (name: string) => void;
 }
 
 const schema = yup
@@ -50,7 +50,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
       await registerUser(data.email, data.password);
 
       console.log("User registered successfully");
-      onRegister();
+      onRegister(data.name);
       reset();
       onClose();
     } catch (err: unknown) {
