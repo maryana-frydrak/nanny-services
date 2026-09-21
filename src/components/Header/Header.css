@@ -52,6 +52,8 @@
 }
 
 .header-nav a {
+  position: relative;
+
   font-weight: 400;
   font-size: 16px;
 
@@ -65,25 +67,41 @@
 
 .header-nav a:hover,
 .header-nav a:focus {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .header.inner .header-nav a.active::after,
-.header.inner .header-nav a[aria-current="page"]::after {
+.header.home .header-nav a.active::after {
   content: "";
   position: absolute;
-  bottom: -6px;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 6px;
-  height: 6px;
-  background-color: #fbfbfb;
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
   border-radius: 50%;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar-wrapper {
+  width: 40px;
+  height: 40px;
+  fill: #f03f3b;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fbfbfb;
 }
 
 .auth-buttons {

@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NanniesPage from "./pages/NanniesPage";
 import FavoritesPage from "./pages/FavoritesPage";
@@ -9,17 +9,20 @@ import { LoginModal } from "./components/LoginModal/LoginModal";
 import RegistrationModal from "./components/RegistrationModal/RegistrationModal";
 import LogoutModal from "./components/LogoutModal/LogoutModal";
 
-function App() {
+function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  const navigate = useNavigate();
 
   return (
-    <BrowserRouter>
+    <>
       <Header
         isLoggedIn={isLoggedIn}
-        userEmail="Ilona"
+        userName={userName}
         onOpenLogin={() => setIsLoginModalOpen(true)}
         onOpenRegister={() => setIsRegisterModalOpen(true)}
         onLogout={() => setIsLogoutModalOpen(true)}
@@ -30,14 +33,21 @@ function App() {
         onClose={() => setIsLoginModalOpen(false)}
         onLogin={() => {
           setIsLoggedIn(true);
+          setUserName("User");
           setIsLoginModalOpen(false);
+          navigate("/nannies");
         }}
       />
 
       <RegistrationModal
         isOpen={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
-        onRegister={() => setIsLoggedIn(true)}
+        onRegister={(name) => {
+          setIsLoggedIn(true);
+          setUserName(name);
+          setIsRegisterModalOpen(false);
+          navigate("/nannies");
+        }}
       />
 
       <LogoutModal
@@ -45,7 +55,9 @@ function App() {
         onClose={() => setIsLogoutModalOpen(false)}
         onConfirm={() => {
           setIsLoggedIn(false);
+          setUserName("");
           setIsLogoutModalOpen(false);
+          navigate("/");
         }}
       />
 
@@ -55,6 +67,14 @@ function App() {
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
