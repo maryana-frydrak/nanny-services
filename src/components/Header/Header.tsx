@@ -29,7 +29,6 @@ export default function Header({
         <nav className="header-nav">
           <NavLink
             to="/"
-            end
             className={({ isActive }) =>
               isActive ? "nav-link active" : "nav-link"
             }
