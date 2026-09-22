@@ -17,6 +17,7 @@
 }
 
 .header.inner {
+  position: relative;
   background-color: #f03f3b;
 }
 
@@ -39,14 +40,31 @@
   opacity: 0.8;
 }
 
-.header-right {
+.header.home .header-right {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 92px;
 }
 
-.header-nav {
+.header.inner .header-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.header.home .header-nav {
+  display: flex;
+  gap: 32px;
+
+  margin-left: auto;
+}
+
+.header.inner .header-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
   display: flex;
   gap: 32px;
 }
@@ -67,11 +85,10 @@
 
 .header-nav a:hover,
 .header-nav a:focus {
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
-.header.inner .header-nav a.active::after,
-.header.home .header-nav a.active::after {
+.header.inner .header-nav a.active::after {
   content: "";
   position: absolute;
   bottom: -10px;
@@ -102,6 +119,18 @@
   align-items: center;
   justify-content: center;
   background-color: #fbfbfb;
+  margin-right: 14px;
+}
+
+.user-name {
+  font-weight: 500;
+  font-size: 18px;
+
+  line-height: 1.11;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+
+  margin-right: 24px;
 }
 
 .auth-buttons {
@@ -139,17 +168,6 @@
   border: 1px solid #f03f3b;
 }
 
-.header.inner .btn-login {
-  border-color: rgba(251, 251, 251, 0.4);
-  color: #fbfbfb;
-}
-
-.header.inner .btn-login:hover,
-.header.inner .btn-login:focus {
-  color: #f03f3b;
-  background-color: #fbfbfb;
-}
-
 .btn-register {
   background-color: #f03f3b;
   border: none;
@@ -163,35 +181,15 @@
   background-color: #fbfbfb;
 }
 
-.header.inner .btn-register {
-  border: 1px solid rgba(251, 251, 251, 0.4);
-}
-
-.user-menu {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: #ffffff;
-}
-
-.header.inner .user-menu {
-  color: #fbfbfb;
-}
-
 .btn-logout {
-  background: transparent;
+  background-color: transparent;
   border: 1px solid rgba(251, 251, 251, 0.4);
   width: 134px;
   height: 48px;
 }
 
-.btn-logout:hover,
-.btn-logout:focus {
+.header.inner .btn-logout:hover,
+.header.inner .btn-logout:focus {
+  background-color: #fbfbfb;
   color: #f03f3b;
-  border: 1px solid #f03f3b;
-}
-
-.header.inner .btn-logout {
-  border-color: rgba(251, 251, 251, 0.4);
-  color: #fbfbfb;
 }

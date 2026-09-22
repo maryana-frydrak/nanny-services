@@ -47,7 +47,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
     try {
       setServerError(null);
 
-      await registerUser(data.email, data.password);
+      await registerUser(data.name, data.email, data.password);
 
       console.log("User registered successfully");
       onRegister(data.name);

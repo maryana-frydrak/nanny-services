@@ -4,10 +4,13 @@ import HomePage from "./pages/HomePage";
 import NanniesPage from "./pages/NanniesPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import Header from "./components/Header/Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LoginModal } from "./components/LoginModal/LoginModal";
 import RegistrationModal from "./components/RegistrationModal/RegistrationModal";
 import LogoutModal from "./components/LogoutModal/LogoutModal";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./services/firebase";
+import { Loader } from "./components/Loader/Loader";
 
 function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,8 +18,29 @@ function AppContent() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [userName, setUserName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+
+        setUserName(user.displayName || user.email || "User");
+      } else {
+        setIsLoggedIn(false);
+        setUserName("");
+      }
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

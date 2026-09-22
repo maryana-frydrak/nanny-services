@@ -3,10 +3,26 @@ import { fetchNannies } from "../services/nannies";
 import type { Nanny } from "../types/nanny";
 import "./NanniesPage.css";
 import { NannyCard } from "../components/NannyCard/NannyCard";
+import { Loader } from "../components/Loader/Loader";
+import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage";
 
 export default function NanniesPage() {
   const [nannies, setNannies] = useState<Nanny[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await fetchNannies();
+      setNannies(data);
+    } catch (err) {
+      setError("Failed to load nannies. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const loadData = async () => {
@@ -29,7 +45,9 @@ export default function NanniesPage() {
 
         <div className="nannies-content">
           {loading ? (
-            <p>Завантаження нянь...</p>
+            <Loader />
+          ) : error ? (
+            <ErrorMessage message={error!} onRetry={loadData} />
           ) : nannies.length > 0 ? (
             <div className="nannies-list">
               {nannies.map((nanny) => (
