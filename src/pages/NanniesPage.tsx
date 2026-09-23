@@ -11,12 +11,15 @@ export default function NanniesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [visibleCount, setVisibleCount] = useState(3);
+
   const loadData = async () => {
     try {
       setLoading(true);
       setError(null);
       const data = await fetchNannies();
-      setNannies(data);
+      setNannies([]);
+      console.log("Fetched nannies from Firebase:", data);
     } catch (err) {
       setError("Failed to load nannies. Please try again later.");
     } finally {
@@ -25,16 +28,12 @@ export default function NanniesPage() {
   };
 
   useEffect(() => {
-    const loadData = async () => {
-      setLoading(true);
-      const data = await fetchNannies();
-      setNannies(data);
-      setLoading(false);
-      console.log("Fetched nannies from Firebase:", data); // Перевіримо в консолі
-    };
-
     loadData();
   }, []);
+
+  const handleLoadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 3);
+  };
 
   return (
     <main className="nannies-page">
@@ -49,13 +48,25 @@ export default function NanniesPage() {
           ) : error ? (
             <ErrorMessage message={error!} onRetry={loadData} />
           ) : nannies.length > 0 ? (
-            <div className="nannies-list">
-              {nannies.map((nanny) => (
-                <NannyCard key={nanny.id || nanny.name} nanny={nanny} />
-              ))}
-            </div>
+            <>
+              <div className="nannies-list">
+                {nannies.slice(0, visibleCount).map((nanny) => (
+                  <NannyCard key={nanny.id || nanny.name} nanny={nanny} />
+                ))}
+              </div>
+
+              {visibleCount < nannies.length && (
+                <button
+                  type="button"
+                  className="load-more-btn"
+                  onClick={handleLoadMore}
+                >
+                  Load more
+                </button>
+              )}
+            </>
           ) : (
-            <p>Нянь не знайдено в базі даних.</p>
+            <ErrorMessage message="No nannies found in the database." />
           )}
         </div>
       </div>

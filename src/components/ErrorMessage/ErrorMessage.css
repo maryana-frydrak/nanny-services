@@ -5,25 +5,38 @@
   justify-content: center;
   padding: 40px;
   text-align: center;
-  color: #f03f3b;
+  min-height: calc(100vh - 400px);
+  width: 100%;
 }
 
-.error-text {
-  font-size: 16px;
-  margin-bottom: 16px;
+.error-message-text {
+  font-weight: 500;
+  font-size: 24px;
+
+  line-height: 1;
+  color: #11101c;
+  margin-bottom: 24px;
 }
 
 .error-retry-btn {
-  padding: 10px 20px;
+  padding: 14px 40px;
   background-color: #f03f3b;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: 30px;
+
+  width: 159px;
+  height: 48px;
+
   font-weight: 500;
+  font-size: 16px;
+
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
   transition: background-color 0.2s;
 }
 
 .error-retry-btn:hover {
-  background-color: #d8322e;
+  opacity: 0.8;
 }

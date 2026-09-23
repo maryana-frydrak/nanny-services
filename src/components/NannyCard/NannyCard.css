@@ -59,8 +59,12 @@
 }
 
 .nanny-details span {
-  color: #38cd3e;
   font-weight: 600;
+}
+
+.nanny-value {
+  font-weight: 600; /* або bold */
+  color: #111111; /* колір значень за макетом */
 }
 
 .nanny-about {
