@@ -22,6 +22,7 @@ export const NannyCard: React.FC<NannyCardProps> = ({ nanny }) => {
     <div className="nanny-card">
       <div className="nanny-avatar-wrapper">
         <img src={nanny.avatar_url} alt={nanny.name} className="nanny-avatar" />
+        <span className="online-indicator"></span>
       </div>
       <div className="nanny-info">
         <div className="nanny-header-top">

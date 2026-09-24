@@ -1,21 +1,131 @@
 .nannies-page {
-  padding: 40px 0;
-  background-color: #f3f3f3; /* або колір фону за макетом Figma */
-  min-height: calc(100vh - 80px);
+  padding: 64px 0;
+  background-color: #f3f3f3;
+  min-height: calc(100vh - 88px);
 }
 
 .container {
-  max-width: 1184px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 128px;
 }
 
 .nannies-header-section {
   margin-bottom: 32px;
 }
 
-.nannies-header-section h2 {
-  font-size: 28px;
-  font-weight: 600;
-  color: #111;
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-label {
+  font-weight: 500;
+  font-size: 14px;
+
+  line-height: 1.28571;
+  color: #8a8a89;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  width: 226px;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 48px;
+  padding: 0 14px 0 18px;
+  background-color: #f03f3b;
+  border: none;
+  border-radius: 14px;
+
+  font-weight: 500;
+  font-size: 18px;
+
+  line-height: 1.11;
+  color: #fbfbfb;
+}
+
+.dropdown-icon {
+  stroke-width: 2px;
+  stroke: #fbfbfb;
+  fill: none;
+}
+
+.dropdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0px 20px 69px rgba(0, 0, 0, 0.07);
+  padding: 14px 18px;
+  list-style: none;
+  margin: 0;
+  z-index: 10;
+}
+
+.dropdown-list li {
+  font-weight: 400;
+  font-size: 18px;
+
+  line-height: 1.11;
+  color: rgba(17, 16, 28, 0.3);
+
+  padding: 8px 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.dropdown-list li:hover,
+.dropdown-list li:focus {
+  color: #11101c;
+}
+
+.nannies-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nannies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.load-more-btn {
+  margin: 64px 0 auto;
+  padding: 14px 40px;
+  background-color: #f03f3b;
+  color: #fbfbfb;
+  border: none;
+  border-radius: 30px;
+
+  width: 159px;
+  height: 48px;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
+  transition: background-color 0.2s;
+}
+
+.load-more-btn:hover,
+.load-more-btn:focus {
+  opacity: 0.8;
 }

@@ -11,6 +11,9 @@ export default function NanniesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("A to Z");
+
   const [visibleCount, setVisibleCount] = useState(3);
 
   const loadData = async () => {
@@ -18,7 +21,7 @@ export default function NanniesPage() {
       setLoading(true);
       setError(null);
       const data = await fetchNannies();
-      setNannies([]);
+      setNannies(data);
       console.log("Fetched nannies from Firebase:", data);
     } catch (err) {
       setError("Failed to load nannies. Please try again later.");
@@ -31,15 +34,84 @@ export default function NanniesPage() {
     loadData();
   }, []);
 
+  const handleSelect = (option: string) => {
+    setSelectedFilter(option);
+    setIsOpen(false);
+  };
+
   const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + 3);
   };
+
+  const getFilteredAndSortedNannies = () => {
+    let result = [...nannies];
+
+    switch (selectedFilter) {
+      case "A to Z":
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "Z to A":
+        result.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "Less than 10$":
+        result = result.filter((nanny) => nanny.price_per_hour < 10);
+        break;
+      case "Greater than 10$":
+        result = result.filter((nanny) => nanny.price_per_hour > 10);
+        break;
+      case "Popular":
+        result.sort((a, b) => b.rating - a.rating);
+        break;
+      case "Not popular":
+        result.sort((a, b) => a.rating - b.rating);
+        break;
+      case "Show all":
+      default:
+        break;
+    }
+
+    return result;
+  };
+
+  const filteredNannies = getFilteredAndSortedNannies();
 
   return (
     <main className="nannies-page">
       <div className="container">
         <div className="nannies-header-section">
-          <h2>Nannies Catalog</h2>
+          <div className="filter-container">
+            <span className="filter-label">Filters</span>
+            <div className="dropdown-wrapper">
+              <button
+                type="button"
+                className="dropdown-toggle"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <span>{selectedFilter}</span>
+                <svg className="dropdown-icon" width="20" height="20">
+                  <use href="/icons.svg#icon-chevron-down" />
+                </svg>
+              </button>
+
+              {isOpen && (
+                <ul className="dropdown-list">
+                  <li onClick={() => handleSelect("A to Z")}>A to Z</li>
+                  <li onClick={() => handleSelect("Z to A")}>Z to A</li>
+                  <li onClick={() => handleSelect("Less than 10$")}>
+                    Less than 10$
+                  </li>
+                  <li onClick={() => handleSelect("Greater than 10$")}>
+                    Greater than 10$
+                  </li>
+                  <li onClick={() => handleSelect("Popular")}>Popular</li>
+                  <li onClick={() => handleSelect("Not popular")}>
+                    Not popular
+                  </li>
+                  <li onClick={() => handleSelect("Show all")}>Show all</li>
+                </ul>
+              )}
+            </div>
+          </div>
         </div>
 
         <div className="nannies-content">
@@ -47,15 +119,15 @@ export default function NanniesPage() {
             <Loader />
           ) : error ? (
             <ErrorMessage message={error!} onRetry={loadData} />
-          ) : nannies.length > 0 ? (
+          ) : filteredNannies.length > 0 ? (
             <>
               <div className="nannies-list">
-                {nannies.slice(0, visibleCount).map((nanny) => (
+                {filteredNannies.slice(0, visibleCount).map((nanny) => (
                   <NannyCard key={nanny.id || nanny.name} nanny={nanny} />
                 ))}
               </div>
 
-              {visibleCount < nannies.length && (
+              {visibleCount < filteredNannies.length && (
                 <button
                   type="button"
                   className="load-more-btn"
