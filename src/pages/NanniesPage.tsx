@@ -5,6 +5,7 @@ import "./NanniesPage.css";
 import { NannyCard } from "../components/NannyCard/NannyCard";
 import { Loader } from "../components/Loader/Loader";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage";
+import { AppointmentModal } from "../components/AppointmentModal/AppointmentModal";
 
 export default function NanniesPage() {
   const [nannies, setNannies] = useState<Nanny[]>([]);
@@ -15,6 +16,19 @@ export default function NanniesPage() {
   const [selectedFilter, setSelectedFilter] = useState("A to Z");
 
   const [visibleCount, setVisibleCount] = useState(3);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNanny, setSelectedNanny] = useState<Nanny | null>(null);
+
+  const handleOpenModal = (nanny: Nanny) => {
+    setSelectedNanny(nanny);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedNanny(null);
+  };
 
   const loadData = async () => {
     try {
@@ -123,7 +137,11 @@ export default function NanniesPage() {
             <>
               <div className="nannies-list">
                 {filteredNannies.slice(0, visibleCount).map((nanny) => (
-                  <NannyCard key={nanny.id || nanny.name} nanny={nanny} />
+                  <NannyCard
+                    key={nanny.id || nanny.name}
+                    nanny={nanny}
+                    onOpenAppointment={() => handleOpenModal(nanny)}
+                  />
                 ))}
               </div>
 
@@ -139,6 +157,13 @@ export default function NanniesPage() {
             </>
           ) : (
             <ErrorMessage message="No nannies found in the database." />
+          )}
+
+          {isModalOpen && selectedNanny && (
+            <AppointmentModal
+              nanny={selectedNanny}
+              onClose={handleCloseModal}
+            />
           )}
         </div>
       </div>

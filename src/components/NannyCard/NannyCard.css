@@ -52,46 +52,249 @@
   flex-grow: 1;
 }
 
+.nanny-header-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.nanny-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .nanny-category {
+  font-weight: 500;
   font-size: 16px;
+
+  line-height: 1.5;
   color: #8a8a89;
-  margin-bottom: 8px;
-  display: block;
 }
 
 .nanny-name {
+  margin: 0;
+
+  font-weight: 600;
   font-size: 24px;
-  font-weight: 500;
-  color: #111111;
-  margin-bottom: 16px;
+
+  line-height: 1;
+  color: #11101c;
+}
+
+.nanny-meta {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nanny-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  font-weight: 600;
+  font-size: 16px;
+
+  line-height: 1.5;
+  color: #11101c;
+
+  position: relative;
+}
+
+.nanny-meta-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -16.5px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  height: 16px;
+  width: 1px;
+  background-color: rgba(17, 16, 28, 0.2);
+}
+
+.icon {
+  display: inline-block;
+}
+
+.icon-location {
+  stroke-width: 1.5px;
+  stroke: #11101c;
+  fill: none;
+}
+
+.icon-star {
+  fill: #ffc531;
+  stroke: #ffc531;
+}
+
+.nanny-price {
+  font-weight: 600;
+  color: #38cd3e;
+}
+
+.favorite-btn {
+  margin-left: 48px;
+}
+
+.icon-heart {
+  stroke-width: 2px;
+  stroke: #11101c;
+  fill: none;
 }
 
 .nanny-details {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 16px;
-  font-size: 16px;
-  color: #111111;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
 .nanny-details p {
+  margin: 0;
+
   background: #f3f3f3;
   padding: 8px 16px;
-  border-radius: 48px;
-}
+  border-radius: 24px;
 
-.nanny-details span {
   font-weight: 600;
+  font-size: 16px;
+
+  line-height: 1.5;
+  color: #8a8a89;
 }
 
 .nanny-value {
-  font-weight: 600; /* або bold */
-  color: #111111; /* колір значень за макетом */
+  color: #11101c;
 }
 
 .nanny-about {
+  margin: 0;
+
+  font-weight: 400;
   font-size: 16px;
+
   line-height: 1.25;
-  color: #8a8a89;
+  color: rgba(17, 16, 28, 0.5);
+}
+
+.read-more-btn {
+  margin-top: 14px;
+
+  font-weight: 600;
+  font-size: 16px;
+
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #11101c;
+
+  padding: 0;
+}
+
+.read-more-btn:hover,
+.read-more-btn:focus {
+  opacity: 0.6;
+}
+
+.nanny-reviews-section {
+  margin-top: 24px;
+}
+
+.reviews-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 48px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.review-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reviewer-avatar-placeholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(240, 63, 59, 0.2);
+
+  font-weight: 500;
+  font-size: 20px;
+
+  line-height: 1;
+  color: #f03f3b;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reviewer-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reviewer-name {
+  font-weight: 500;
+  font-size: 16px;
+
+  line-height: 1.25;
+  color: #11101c;
+  margin: 0;
+}
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+
+  line-height: 1.29;
+  color: #11101c;
+  margin: 0;
+}
+
+.review-comment {
+  font-weight: 400;
+  font-size: 16px;
+
+  line-height: 1.25;
+  color: rgba(17, 16, 28, 0.5);
+  margin: 0;
+}
+
+.make-appointment-btn {
+  background-color: #f03f3b;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 28px;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+
+  transition: background-color 0.3s ease;
+}
+
+.make-appointment-btn:hover,
+.make-appointment-btn:focus {
+  opacity: 0.6;
 }
