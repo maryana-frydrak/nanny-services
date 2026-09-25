@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import type { Nanny } from "../../types/nanny";
 import "./NannyCard.css";
 
 interface NannyCardProps {
   nanny: Nanny;
+  onOpenAppointment: () => void;
 }
 
-export const NannyCard: React.FC<NannyCardProps> = ({ nanny }) => {
+export const NannyCard: React.FC<NannyCardProps> = ({
+  nanny,
+  onOpenAppointment,
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const calculateAge = (birthday: string): number => {
     const birthDate = new Date(birthday);
     const today = new Date();
@@ -32,31 +38,31 @@ export const NannyCard: React.FC<NannyCardProps> = ({ nanny }) => {
           </div>
 
           <div className="nanny-meta">
-            <span>
-              <svg className="icon" width="16" height="16">
+            <span className="nanny-meta-item">
+              <svg className="icon icon-location" width="16" height="16">
                 <use href="/icons.svg#icon-map-pin" />
               </svg>
               {nanny.location}
             </span>
-            <span>
-              <svg className="icon" width="16" height="16">
+            <span className="nanny-meta-item">
+              <svg className="icon icon-star" width="16" height="16">
                 <use href="/icons.svg#icon-star" />
               </svg>
               Rating: {nanny.rating}
             </span>
-            <span>
+            <span className="nanny-meta-item">
               Price / 1 hour:
               <span className="nanny-price">{nanny.price_per_hour}$</span>
+              <button
+                type="button"
+                className="favorite-btn"
+                aria-label="Add to favorites"
+              >
+                <svg className="icon icon-heart" width="26" height="26">
+                  <use href="/icons.svg#icon-heart-normal" />
+                </svg>
+              </button>
             </span>
-            <button
-              type="button"
-              className="favorite-btn"
-              aria-label="Add to favorites"
-            >
-              <svg className="icon" width="26" height="26">
-                <use href="/icons.svg#icon-heart-normal" />
-              </svg>
-            </button>
           </div>
         </div>
 
@@ -71,9 +77,6 @@ export const NannyCard: React.FC<NannyCardProps> = ({ nanny }) => {
           <p>
             Kids Age: <span className="nanny-value">{nanny.kids_age}</span>
           </p>
-        </div>
-
-        <div className="nanny-characters">
           <p>
             Characters:{" "}
             <span className="nanny-value">
@@ -82,9 +85,6 @@ export const NannyCard: React.FC<NannyCardProps> = ({ nanny }) => {
                 .join(", ")}
             </span>
           </p>
-        </div>
-
-        <div className="nanny-education">
           <p>
             Education: <span className="nanny-value">{nanny.education}</span>
           </p>
@@ -92,9 +92,48 @@ export const NannyCard: React.FC<NannyCardProps> = ({ nanny }) => {
 
         <p className="nanny-about">{nanny.about}</p>
 
-        <button type="button" className="read-more-btn">
-          Read more
+        <button
+          type="button"
+          className="read-more-btn"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          {isExpanded ? "Hide reviews" : "Read more"}
         </button>
+        {isExpanded && (
+          <div className="nanny-reviews-section">
+            <ul className="reviews-list">
+              {nanny.reviews.map((review, index) => (
+                <li key={index} className="review-item">
+                  <div className="review-header">
+                    <div className="reviewer-avatar-placeholder">
+                      {review.reviewer.charAt(0)}
+                    </div>
+                    <div className="reviewer-meta">
+                      <h4 className="reviewer-name">{review.reviewer}</h4>
+                      <p className="review-rating">
+                        <svg className="icon icon-star" width="16" height="16">
+                          <use href="/icons.svg#icon-star" />
+                        </svg>
+                        {review.rating.toFixed(1)}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="review-comment">{review.comment}</p>
+                </li>
+              ))}
+            </ul>
+
+            <button
+              type="button"
+              className="make-appointment-btn"
+              onClick={() => {
+                onOpenAppointment();
+              }}
+            >
+              Make an appointment
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
