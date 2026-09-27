@@ -1,5 +1,6 @@
-import { ref, get } from "firebase/database";
+import { ref, get, push } from "firebase/database";
 import { database } from "./firebase";
+import type { AppointmentPayload } from "../types/appointment";
 
 export const fetchNannies = async () => {
   try {
@@ -17,5 +18,18 @@ export const fetchNannies = async () => {
   } catch (error) {
     console.error("Error fetching nannies:", error);
     return [];
+  }
+};
+
+export const addAppointment = async (appointmentData: AppointmentPayload) => {
+  try {
+    const appointmentsRef = ref(database, "appointments");
+    await push(appointmentsRef, {
+      ...appointmentData,
+      createdAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("Error adding appointment:", error);
+    throw error;
   }
 };

@@ -16,10 +16,270 @@
 .appointment-modal-content {
   position: relative;
   width: 599px;
-  max-width: 100%; /* Ширина з макету */
-  background-color: #fbfbfb; /* Колір фону з Figma */
-  border-radius: 30px; /* Заокруглення кутів з макету */
-  padding: 64px; /* Внутрішні відступи (підлаштуй під себе, якщо потрібно) */
+  max-width: 100%;
+  background-color: #fbfbfb;
+  border-radius: 30px;
+  padding: 64px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.close-btn svg {
+  width: 32px;
+  height: 32px;
+
+  stroke-width: 2.5px;
+  stroke: #11101c;
+
+  transition: stroke 0.3s ease;
+}
+
+.close-btn:hover svg,
+.close-btn:focus svg {
+  opacity: 0.6;
+}
+
+.appointment-modal-title {
+  font-weight: 500;
+  font-size: 40px;
+
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #11101c;
+
+  margin: 12px 0 20px;
+}
+
+.appointment-modal-subtitle {
+  font-size: 16px;
+  line-height: 1.37;
+  color: rgba(17, 17, 17, 0.5);
+
+  margin: 0 0 40px;
+}
+
+.appointment-modal-nanny-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.appointment-modal-nanny-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+  object-fit: cover;
+
+  background: #e0e0e0;
+}
+
+.appointment-modal-nanny-label {
+  font-weight: 500;
+  font-size: 12px;
+
+  line-height: 1.33;
+  color: #8a8a89;
+
+  padding-bottom: 4px;
+}
+
+.appointment-modal-nanny-name {
+  font-weight: 600;
+  font-size: 16px;
+
+  line-height: 1.5;
+  color: #11101c;
+
+  margin: 0;
+}
+
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.appointment-form-row {
+  display: flex;
+  gap: 8px;
+}
+
+.appointment-form-row input,
+.appointment-form textarea,
+.appointment-form input {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(17, 16, 28, 0.1);
+  border-radius: 12px;
+
+  font-weight: 400;
+  font-size: 16px;
+
+  line-height: 1.25;
+  color: #11101c;
+
+  outline: none;
+  box-sizing: border-box;
+}
+
+.appointment-form-row input:hover,
+.appointment-form textarea:hover,
+.appointment-form input:hover,
+.appointment-form-row input:focus,
+.appointment-form textarea:focus,
+.appointment-form input:focus {
+  border-color: #11101c;
+}
+
+.meeting-time-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.meeting-time-input {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(17, 16, 28, 0.1);
+  border-radius: 12px;
+
+  font-weight: 400;
+  font-size: 16px;
+
+  line-height: 1.25;
+  color: #11101c;
+
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.meeting-time-input:hover,
+.meeting-time-input:focus {
+  border-color: #11101c;
+}
+
+.clock-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  stroke-width: 1.5px;
+  stroke: #11101c;
+  fill: none;
+}
+
+.time-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+
+  border-radius: 12px;
+  box-shadow: 0 20px 69px 0 rgba(0, 0, 0, 0.07);
+  list-style: none;
+  padding: 16px 0;
+  margin: 0;
+  z-index: 999;
+  max-height: 180px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.time-dropdown-title {
+  font-weight: 500;
+  font-size: 16px;
+
+  line-height: 1.5;
+  color: #11101c;
+
+  margin-bottom: 16px;
+  padding-left: 16px;
+}
+
+.time-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.time-dropdown li {
+  padding: 4px 18px;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  line-height: 1.25;
+  text-align: center;
+  color: rgba(17, 16, 28, 0.3);
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.time-dropdown li:hover,
+.time-dropdown li:focus {
+  color: #11101c;
+}
+
+.time-placeholder {
+  color: rgba(17, 16, 28, 0.4);
+}
+
+.time-value {
+  color: #11101c;
+}
+
+.meeting-time-input .clock-icon svg {
+  stroke: rgba(17, 16, 28, 0.4);
+  transition: stroke 0.3s ease;
+}
+
+.meeting-time-input.is-selected .clock-icon svg {
+  stroke: #11101c;
+}
+
+.appointment-form textarea {
+  resize: none;
+  min-height: 116px;
+}
+
+.appointment-send-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #f03f3b;
+  border: none;
+  border-radius: 30px;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+
+  margin-top: 24px;
+  transition: background-color 0.3s ease;
+}
+
+.appointment-send-btn:hover,
+.appointment-send-btn:focus {
+  opacity: 0.6;
 }
