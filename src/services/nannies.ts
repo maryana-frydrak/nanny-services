@@ -17,10 +17,12 @@ export const fetchNannies = async () => {
         }));
       }
 
-      return Object.entries(data).map(([key, value]) => ({
-        ...(value as object),
-        id: key,
-      }));
+      return Object.entries(data)
+        .filter(([key]) => key !== "appointments")
+        .map(([key, value]) => ({
+          ...(value as object),
+          id: key,
+        }));
     } else {
       console.log("No data available");
       return [];

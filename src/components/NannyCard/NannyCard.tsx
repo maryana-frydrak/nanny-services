@@ -80,7 +80,7 @@ export const NannyCard: React.FC<NannyCardProps> = ({
           <p>
             Characters:{" "}
             <span className="nanny-value">
-              {nanny.characters
+              {(nanny.characters ?? [])
                 .map((char) => char.charAt(0).toUpperCase() + char.slice(1))
                 .join(", ")}
             </span>

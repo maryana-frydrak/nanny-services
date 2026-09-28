@@ -283,3 +283,101 @@
 .appointment-send-btn:focus {
   opacity: 0.6;
 }
+
+.error-text {
+  color: #e03636;
+  font-weight: 500;
+  font-size: 16px;
+  margin: -10px 0 10px 4px;
+}
+
+.success-text {
+  color: #38cd3e;
+  font-weight: 500;
+  font-size: 16px;
+  margin: -10px 0 10px 4px;
+}
+
+/* Затемнення та контейнер поверх форми */
+.success-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 17, 17, 0.4); /* Напівпрозорий темний фон */
+  backdrop-filter: blur(2px); /* Легке розмиття форми під ним */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px; /* Має збігатися з радіусом головного модального вікна */
+  z-index: 10;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Саме віконце подяки */
+.success-popup {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+.success-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.success-popup h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #38cd3e;
+  margin-bottom: 10px;
+}
+
+.success-popup p {
+  font-size: 14px;
+  color: #8a8a89;
+  line-height: 1.4;
+}
+
+/* Анімації появи */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Червоний акцент для заголовка помилки */
+.error-popup h3 {
+  color: #e74c3c;
+}
+
+/* Стиль для кнопки "Try again" у попапі помилки */
+.error-popup .submit-btn {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #e74c3c; /* Можна зробити кнопку червоною або залишити у фірмовому стилі */
+}
+
+.error-popup .submit-btn:hover {
+  background-color: #c0392b;
+}
