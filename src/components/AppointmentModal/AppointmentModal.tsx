@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { Nanny } from "../../types/nanny";
 import "./AppointmentModal.css";
+import { addAppointment } from "../../services/nannies";
 
 interface AppointmentModalProps {
   nanny: Nanny;
@@ -29,7 +30,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     };
   }, [onClose]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
@@ -40,18 +41,24 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
 
     const formData = new FormData(e.currentTarget);
     const appointmentData = {
-      address: formData.get("address"),
-      phone: formData.get("phone"),
-      childAge: formData.get("childAge"),
-      email: formData.get("email"),
-      parentName: formData.get("parentName"),
-      comment: formData.get("comment"),
+      address: formData.get("address") as string,
+      phone: formData.get("phone") as string,
+      childAge: formData.get("childAge") as string,
+      email: formData.get("email") as string,
+      parentName: formData.get("parentName") as string,
+      comment: (formData.get("comment") as string) || "",
       meetingTime: selectedTime,
-      nannyId: nanny.id,
-      nannyName: nanny.name,
+      nannyId: nanny.id as string,
+      nannyName: nanny.name as string,
     };
 
-    onClose();
+    try {
+      await addAppointment(appointmentData);
+
+      onClose();
+    } catch (err) {
+      setError("Failed to send appointment. Please try again.");
+    }
   };
 
   return (
