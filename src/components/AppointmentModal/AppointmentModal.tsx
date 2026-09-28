@@ -14,7 +14,14 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
 }) => {
   const [isOpenTime, setIsOpenTime] = React.useState(false);
   const [selectedTime, setSelectedTime] = React.useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [error, setError] = useState(
+    "Failed to send appointment. Please try again.",
+  );
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -55,9 +62,14 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     try {
       await addAppointment(appointmentData);
 
-      onClose();
+      setSuccessMessage("Appointment successfully submitted!");
+      setIsSubmitting(false);
+      setTimeout(() => {
+        onClose();
+      }, 3000);
     } catch (err) {
       setError("Failed to send appointment. Please try again.");
+      setIsSubmitting(false);
     }
   };
 
@@ -150,17 +162,9 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
             </div>
           </div>
 
-          {error && (
-            <p
-              style={{
-                color: "#e03636",
-                fontSize: "14px",
-                margin: "-10px 0 10px 4px",
-              }}
-            >
-              {error}
-            </p>
-          )}
+          {/* {error && <p className="error-text">{error}</p>} */}
+
+          {/* {successMessage && <p className="success-text">{successMessage}</p>} */}
 
           <input type="email" placeholder="Email" required />
           <input type="text" placeholder="Father's or mother's name" required />
@@ -171,6 +175,34 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
             Send
           </button>
         </form>
+
+        {successMessage && (
+          <div className="success-overlay">
+            <div className="success-popup">
+              <div className="success-icon">🎉</div>
+              <h3>Success!</h3>
+              <p>{successMessage}</p>
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <div className="success-overlay">
+            <div className="success-popup">
+              <div className="success-icon">❌</div>
+              <h3 style={{ color: "#e74c3c" }}>Error!</h3>
+              <p>{error}</p>
+              <button
+                type="button"
+                className="submit-btn"
+                onClick={() => setError("")}
+                style={{ marginTop: "20px" }}
+              >
+                Try again
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

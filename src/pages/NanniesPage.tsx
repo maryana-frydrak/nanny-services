@@ -62,10 +62,10 @@ export default function NanniesPage() {
 
     switch (selectedFilter) {
       case "A to Z":
-        result.sort((a, b) => a.name.localeCompare(b.name));
+        result.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
         break;
       case "Z to A":
-        result.sort((a, b) => b.name.localeCompare(a.name));
+        result.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
         break;
       case "Less than 10$":
         result = result.filter((nanny) => nanny.price_per_hour < 10);
