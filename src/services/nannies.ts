@@ -10,7 +10,17 @@ export const fetchNannies = async () => {
       const data = snapshot.val();
       console.log("RAW DATA FROM FIREBASE:", data);
 
-      return Array.isArray(data) ? data : Object.values(data);
+      if (Array.isArray(data)) {
+        return data.map((item, index) => ({
+          ...item,
+          id: item.id || String(index),
+        }));
+      }
+
+      return Object.entries(data).map(([key, value]) => ({
+        ...(value as object),
+        id: key,
+      }));
     } else {
       console.log("No data available");
       return [];
