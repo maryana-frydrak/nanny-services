@@ -284,42 +284,28 @@
   opacity: 0.6;
 }
 
-.error-text {
-  color: #e03636;
-  font-weight: 500;
-  font-size: 16px;
-  margin: -10px 0 10px 4px;
-}
-
-.success-text {
-  color: #38cd3e;
-  font-weight: 500;
-  font-size: 16px;
-  margin: -10px 0 10px 4px;
-}
-
-/* Затемнення та контейнер поверх форми */
-.success-overlay {
+.success-overlay,
+.error-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(17, 17, 17, 0.4); /* Напівпрозорий темний фон */
-  backdrop-filter: blur(2px); /* Легке розмиття форми під ним */
+  background-color: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 24px; /* Має збігатися з радіусом головного модального вікна */
+  border-radius: 30px;
   z-index: 10;
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Саме віконце подяки */
-.success-popup {
-  background-color: #ffffff;
-  padding: 40px 30px;
-  border-radius: 20px;
+.success-popup,
+.error-popup {
+  background-color: #fbfbfb;
+  padding: 30px 30px;
+  border-radius: 30px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   text-align: center;
   max-width: 320px;
@@ -327,25 +313,29 @@
   animation: scaleUp 0.3s ease-in-out;
 }
 
-.success-icon {
-  font-size: 40px;
-  margin-bottom: 15px;
+.success-icon .icon-party-popper {
+  width: 48px;
+  height: 48px;
+  fill: none;
+  margin-bottom: 16px;
 }
 
 .success-popup h3 {
-  font-size: 24px;
   font-weight: 600;
+  font-size: 24px;
+  line-height: 1.5;
   color: #38cd3e;
-  margin-bottom: 10px;
+  margin: 0 0 20px;
 }
 
-.success-popup p {
+.success-popup-text {
+  color: rgba(17, 16, 28, 0.5);
+  font-weight: 400;
   font-size: 14px;
-  color: #8a8a89;
-  line-height: 1.4;
+  line-height: 1.1;
+  margin: 0;
 }
 
-/* Анімації появи */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -366,18 +356,47 @@
   }
 }
 
-/* Червоний акцент для заголовка помилки */
+.custom-error-icon {
+  width: 48px;
+  height: 48px;
+  stroke: #e03636;
+  margin-bottom: 16px;
+}
+
 .error-popup h3 {
-  color: #e74c3c;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.5;
+  color: #e03636;
+  margin: 0 0 16px;
 }
 
-/* Стиль для кнопки "Try again" у попапі помилки */
+.error-popup-text {
+  color: rgba(17, 16, 28, 0.5);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.1;
+  margin: 0 0 24px;
+}
+
 .error-popup .submit-btn {
-  margin-top: 20px;
   width: 100%;
-  background-color: #e74c3c; /* Можна зробити кнопку червоною або залишити у фірмовому стилі */
+  padding: 12px;
+  background-color: #f03f3b;
+  border: none;
+  border-radius: 30px;
+
+  font-weight: 400;
+  font-size: 16px;
+
+  line-height: 1.17;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+
+  transition: background-color 0.3s ease;
 }
 
-.error-popup .submit-btn:hover {
-  background-color: #c0392b;
+.error-popup .submit-btn:hover,
+.error-popup .submit-btn:focus {
+  opacity: 0.8;
 }

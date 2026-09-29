@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import type { Nanny } from "../../types/nanny";
 import "./AppointmentModal.css";
 import { addAppointment } from "../../services/nannies";
+import { CloudAlert } from "lucide-react";
 
 interface AppointmentModalProps {
   nanny: Nanny;
@@ -14,14 +15,8 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
 }) => {
   const [isOpenTime, setIsOpenTime] = React.useState(false);
   const [selectedTime, setSelectedTime] = React.useState("");
-  // const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const [error, setError] = useState(
-    "Failed to send appointment. Please try again.",
-  );
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -63,13 +58,11 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
       await addAppointment(appointmentData);
 
       setSuccessMessage("Appointment successfully submitted!");
-      setIsSubmitting(false);
       setTimeout(() => {
         onClose();
       }, 3000);
     } catch (err) {
       setError("Failed to send appointment. Please try again.");
-      setIsSubmitting(false);
     }
   };
 
@@ -162,10 +155,6 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
             </div>
           </div>
 
-          {/* {error && <p className="error-text">{error}</p>} */}
-
-          {/* {successMessage && <p className="success-text">{successMessage}</p>} */}
-
           <input type="email" placeholder="Email" required />
           <input type="text" placeholder="Father's or mother's name" required />
 
@@ -179,24 +168,29 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
         {successMessage && (
           <div className="success-overlay">
             <div className="success-popup">
-              <div className="success-icon">🎉</div>
+              <div className="success-icon">
+                <svg className="icon-party-popper" width="48" height="48">
+                  <use href="/icons.svg#icon-party-popper"></use>
+                </svg>
+              </div>
               <h3>Success!</h3>
-              <p>{successMessage}</p>
+              <p className="success-popup-text">{successMessage}</p>
             </div>
           </div>
         )}
 
         {error && (
-          <div className="success-overlay">
-            <div className="success-popup">
-              <div className="success-icon">❌</div>
-              <h3 style={{ color: "#e74c3c" }}>Error!</h3>
-              <p>{error}</p>
+          <div className="error-overlay">
+            <div className="error-popup">
+              <div className="error-icon">
+                <CloudAlert className="custom-error-icon" />
+              </div>
+              <h3>Something went wrong</h3>
+              <p className="error-popup-text">{error}</p>
               <button
                 type="button"
                 className="submit-btn"
                 onClick={() => setError("")}
-                style={{ marginTop: "20px" }}
               >
                 Try again
               </button>
