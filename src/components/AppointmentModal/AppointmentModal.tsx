@@ -3,6 +3,14 @@ import type { Nanny } from "../../types/nanny";
 import "./AppointmentModal.css";
 import { addAppointment } from "../../services/nannies";
 import { CloudAlert } from "lucide-react";
+import {
+  appointmentSchema,
+  type AppointmentFormData,
+} from "../../types/appointmentSchema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useFormPersist from "react-hook-form-persist";
+import type { AppointmentPayload } from "../../types/appointment";
 
 interface AppointmentModalProps {
   nanny: Nanny;
@@ -14,9 +22,29 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   onClose,
 }) => {
   const [isOpenTime, setIsOpenTime] = React.useState(false);
-  const [selectedTime, setSelectedTime] = React.useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<AppointmentFormData>({
+    resolver: zodResolver(appointmentSchema),
+  });
+
+  useFormPersist("appointment-form", {
+    watch,
+    setValue,
+    storage: window.localStorage,
+  });
+
+  const [selectedTime, setSelectedTime] = useState<string>(() => {
+    return localStorage.getItem("appointment-time") || "";
+  });
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -32,8 +60,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     };
   }, [onClose]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (data: AppointmentFormData) => {
     setError("");
 
     if (!selectedTime) {
@@ -41,14 +68,8 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
       return;
     }
 
-    const formData = new FormData(e.currentTarget);
-    const appointmentData = {
-      address: formData.get("address") as string,
-      phone: formData.get("phone") as string,
-      childAge: formData.get("childAge") as string,
-      email: formData.get("email") as string,
-      parentName: formData.get("parentName") as string,
-      comment: (formData.get("comment") as string) || "",
+    const appointmentData: AppointmentPayload = {
+      ...data,
       meetingTime: selectedTime,
       nannyId: nanny.id as string,
       nannyName: nanny.name as string,
@@ -58,6 +79,12 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
       await addAppointment(appointmentData);
 
       setSuccessMessage("Appointment successfully submitted!");
+
+      localStorage.removeItem("appointment-form");
+      localStorage.removeItem("appointment-time");
+      reset();
+      setSelectedTime("");
+
       setTimeout(() => {
         onClose();
       }, 3000);
@@ -99,14 +126,37 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
           </div>
         </div>
 
-        <form className="appointment-form" onSubmit={handleSubmit}>
+        <form className="appointment-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="appointment-form-row">
-            <input type="text" placeholder="Address" required />
-            <input type="tel" placeholder="+380" required />
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Address"
+                {...register("address")}
+              />
+              {errors.address && (
+                <p className="error-text">{errors.address.message}</p>
+              )}
+            </div>
+            <div className="input-group">
+              <input type="tel" placeholder="+380" {...register("phone")} />
+              {errors.phone && (
+                <p className="error-text">{errors.phone.message}</p>
+              )}
+            </div>
           </div>
 
           <div className="appointment-form-row">
-            <input type="text" placeholder="Child's age" required />
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Child's age"
+                {...register("childAge")}
+              />
+              {errors.childAge && (
+                <p className="error-text">{errors.childAge.message}</p>
+              )}
+            </div>
 
             <div className="meeting-time-wrapper">
               <div
@@ -142,6 +192,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                         key={time}
                         onClick={() => {
                           setSelectedTime(time);
+                          localStorage.setItem("appointment-time", time);
                           setIsOpenTime(false);
                           setError("");
                         }}
@@ -155,10 +206,30 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
             </div>
           </div>
 
-          <input type="email" placeholder="Email" required />
-          <input type="text" placeholder="Father's or mother's name" required />
+          <div className="input-group">
+            <input type="email" placeholder="Email" {...register("email")} />
+            {errors.email && (
+              <p className="error-text">{errors.email.message}</p>
+            )}
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Father's or mother's name"
+              {...register("parentName")}
+            />
+            {errors.parentName && (
+              <p className="error-text">{errors.parentName.message}</p>
+            )}
+          </div>
 
-          <textarea placeholder="Comment" rows={4}></textarea>
+          <div className="input-group">
+            <textarea
+              placeholder="Comment"
+              rows={4}
+              {...register("comment")}
+            ></textarea>
+          </div>
 
           <button type="submit" className="appointment-send-btn">
             Send
