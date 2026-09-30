@@ -4,7 +4,7 @@ export interface AppointmentPayload {
   childAge: string;
   email: string;
   parentName: string;
-  comment: string;
+  comment?: string;
   meetingTime: string;
   nannyId: string;
   nannyName: string;
