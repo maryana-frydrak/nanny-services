@@ -264,7 +264,7 @@
 .appointment-send-btn {
   width: 100%;
   padding: 16px;
-  background-color: #f03f3b;
+  background-color: var(--color-primary);
   border: none;
   border-radius: 30px;
 
@@ -382,7 +382,7 @@
 .error-popup .submit-btn {
   width: 100%;
   padding: 12px;
-  background-color: #f03f3b;
+  background-color: var(--color-primary);
   border: none;
   border-radius: 30px;
 

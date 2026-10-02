@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./LoginModal.css";
 import { loginUser } from "../../services/auth";
+import type { FirebaseErrorType } from "../../types/auth";
 
 const schema = yup
   .object({
@@ -31,6 +32,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   onLogin,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   const {
     register,
@@ -61,15 +63,28 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
   const onSubmit = async (data: LoginFormData) => {
     try {
+      setAuthError(null);
       await loginUser(data.email, data.password);
       onLogin();
       reset();
       onClose();
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        console.error("Login error:", err.message);
+      console.error("Login error:", err);
+
+      const error = err as FirebaseErrorType;
+
+      if (
+        error.code === "auth/invalid-credential" ||
+        error.code === "auth/wrong-password" ||
+        error.code === "auth/user-not-found"
+      ) {
+        setAuthError("Invalid email or password.");
+      } else if (error.code === "auth/too-many-requests") {
+        setAuthError("Too many login attempts. Please try again later.");
+      } else if (typeof error.message === "string") {
+        setAuthError(error.message);
       } else {
-        console.error("An unexpected error occurred during login");
+        setAuthError("An error occurred during login.");
       }
     }
   };
@@ -122,6 +137,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({
               <span className="error-text">{errors.password.message}</span>
             )}
           </div>
+
+          {authError && (
+            <span className="error-text general-error">{authError}</span>
+          )}
 
           <button type="submit" className="modal-submit-btn">
             Log In
