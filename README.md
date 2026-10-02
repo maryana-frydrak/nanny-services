@@ -1,75 +1,79 @@
-# React + TypeScript + Vite
+Markdown
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 👶 Nanny.Services — Find Your Perfect Nanny
 
-Currently, two official plugins are available:
+A modern, fully responsive web application designed to connect families with professional, verified childcare providers. Built with **React**, **TypeScript**, and modern styling best practices, featuring user authentication, advanced filtering, and a personalized favorites system.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 📸 App Preview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+_(Add your actual application screenshots or GIFs here, e.g., catalog view, profile details, or theme switcher in action)_
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Key Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Home Page:** A welcoming landing page featuring an engaging presentation and a direct Call-to-Action (CTA) to explore available caregivers.
+- **Nannies Catalog:** A comprehensive, responsive list of professional nannies with detailed profiles (experience, kids' age, ratings, hourly rates, and personal bios).
+- **Advanced Filtering:** Powerful filtering tools to sort and find caregivers based on specific preferences and criteria.
+- **Favorites System:** Authenticated users can save and manage their favorite nannies for quick access.
+- **Secure Authentication:** Fully functional Modal-based Log in and Registration workflows.
+- **Theme Customization:** Interactive theme switcher allowing users to personalize the interface with custom color schemes (Red, Blue, Green) stored locally.
+- **Responsive Layout & Design:** Built with custom clean styling, soft-squared ("squircle") UI elements, and a polished user experience across devices.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Tech Stack
 
-```
+- **Library:** React
+- **Routing:** React Router DOM
+- **Icons:** Lucide React & Custom SVG sprites
+- **Language:** TypeScript
+- **State Management & Data:** Asynchronous API handling & LocalStorage for preferences
+- **Deployment:** Vercel
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Installation and Setup
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+To run this project locally on your machine, follow these steps:
 
-```
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/maryana-frydrak/your-repo-name.git](https://github.com/maryana-frydrak/your-repo-name.git)
+   Navigate to the project directory:
+   ```
+
+Bash
+cd your-repo-name
+Install dependencies:
+
+Bash
+npm install
+Run the development server:
+
+Bash
+npm run dev
+Open http://localhost:3000 in your browser to view the application.
+
+✅ Checklist & Technical Criteria Compliance
+[x] Pixel-perfect layout accuracy matching design guidelines.
+
+[x] Zero console errors or warnings.
+
+[x] Responsive navigation and dynamic routing (Home, Nannies, Favorites).
+
+[x] Fully functional authentication state handling (Logged in / Logged out).
+
+[x] Interactive theme switcher with persistent settings.
+
+[x] Clean, semantic HTML and component-based architecture.
+
+👨‍💻 Author
+Mariana Frydrak
+
+GitHub: @maryana-frydrak
+
+🌐 Live Demo
+Nanny.Services Live Preview

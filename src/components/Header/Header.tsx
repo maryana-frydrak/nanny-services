@@ -1,5 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import "./Header.css";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { Palette } from "lucide-react";
 
 interface HeaderProps {
   isLoggedIn: boolean;
@@ -18,6 +20,28 @@ export default function Header({
 }: HeaderProps) {
   const location = useLocation();
   const isHome = location.pathname === "/";
+
+  const [isThemeOpen, setIsThemeOpen] = useState(false);
+  const themeDropdownRef = useRef<HTMLDivElement>(null);
+
+  const changeTheme = (themeName: string) => {
+    document.documentElement.setAttribute("data-theme", themeName);
+    localStorage.setItem("app-theme", themeName);
+    setIsThemeOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        themeDropdownRef.current &&
+        !themeDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsThemeOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className={`header ${isHome ? "home" : "inner"}`}>
@@ -54,6 +78,44 @@ export default function Header({
             </NavLink>
           )}
         </nav>
+
+        <div className="theme-dropdown-container" ref={themeDropdownRef}>
+          <button
+            type="button"
+            className="theme-toggle-btn"
+            onClick={() => setIsThemeOpen(!isThemeOpen)}
+            aria-label="Toggle theme menu"
+          >
+            <Palette size={20} />
+          </button>
+
+          {isThemeOpen && (
+            <div className="theme-dropdown-menu">
+              <button
+                type="button"
+                className="theme-option red"
+                onClick={() => changeTheme("red")}
+              >
+                <span className="theme-badge">Red</span>
+              </button>
+              <button
+                type="button"
+                className="theme-option blue"
+                onClick={() => changeTheme("blue")}
+              >
+                <span className="theme-badge">Blue</span>
+              </button>
+              <button
+                type="button"
+                className="theme-option green"
+                onClick={() => changeTheme("green")}
+              >
+                <span className="theme-badge">Green</span>
+              </button>
+            </div>
+          )}
+        </div>
+
         <div className="header-actions">
           {isLoggedIn ? (
             <div className="user-menu">

@@ -37,3 +37,22 @@ img {
   display: block;
   max-width: 100%;
 }
+
+:root,
+[data-theme="red"] {
+  --color-primary: #f03f3b;
+  --color-bg-light: rgba(240, 63, 59, 0.2);
+  --color-background-btn: #f03f3b;
+}
+
+[data-theme="blue"] {
+  --color-primary: #0957c3;
+  --color-bg-light: rgba(9, 87, 195, 0.2);
+  --color-background-btn: #0957c3;
+}
+
+[data-theme="green"] {
+  --color-primary: #103931;
+  --color-bg-light: rgba(16, 57, 49, 0.2);
+  --color-background-btn: #103931;
+}

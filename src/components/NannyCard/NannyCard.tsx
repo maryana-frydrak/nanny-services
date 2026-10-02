@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import type { Nanny } from "../../types/nanny";
 import "./NannyCard.css";
+import { useFavoritesStore } from "../../store/useFavoritesStore";
 
 interface NannyCardProps {
   nanny: Nanny;
@@ -12,6 +13,17 @@ export const NannyCard: React.FC<NannyCardProps> = ({
   onOpenAppointment,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { addFavorite, removeFavorite, isFavorite } = useFavoritesStore();
+  const nannyId = nanny.id as string;
+  const favorite = isFavorite(nannyId);
+
+  const handleFavoriteClick = () => {
+    if (favorite) {
+      removeFavorite(nannyId);
+    } else {
+      addFavorite(nanny);
+    }
+  };
 
   const calculateAge = (birthday: string): number => {
     const birthDate = new Date(birthday);
@@ -55,11 +67,22 @@ export const NannyCard: React.FC<NannyCardProps> = ({
               <span className="nanny-price">{nanny.price_per_hour}$</span>
               <button
                 type="button"
-                className="favorite-btn"
+                className={`favorite-btn ${favorite ? "active" : ""}`}
+                onClick={handleFavoriteClick}
                 aria-label="Add to favorites"
               >
-                <svg className="icon icon-heart" width="26" height="26">
-                  <use href="/icons.svg#icon-heart-normal" />
+                <svg
+                  className={`icon icon-heart ${favorite ? "active-heart" : ""}`}
+                  width="26"
+                  height="26"
+                >
+                  <use
+                    href={
+                      favorite
+                        ? "/icons.svg#icon-heart-active"
+                        : "/icons.svg#icon-heart-normal"
+                    }
+                  />
                 </svg>
               </button>
             </span>

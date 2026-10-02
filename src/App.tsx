@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { LoginModal } from "./components/LoginModal/LoginModal";
 import RegistrationModal from "./components/RegistrationModal/RegistrationModal";
 import LogoutModal from "./components/LogoutModal/LogoutModal";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./services/firebase";
 import { Loader } from "./components/Loader/Loader";
 
@@ -23,6 +23,9 @@ function AppContent() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem("app-theme") || "red";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
@@ -77,7 +80,8 @@ function AppContent() {
       <LogoutModal
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}
-        onConfirm={() => {
+        onConfirm={async () => {
+          await signOut(auth);
           setIsLoggedIn(false);
           setUserName("");
           setIsLogoutModalOpen(false);

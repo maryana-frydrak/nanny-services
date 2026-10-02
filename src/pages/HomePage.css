@@ -11,7 +11,7 @@
 
 .hero-content {
   width: 50%;
-  background-color: #f03f3b;
+  background-color: var(--color-primary);
   color: #ffffff;
   padding: 251px 64px 163px 96px;
   display: flex;
@@ -111,7 +111,7 @@
 .badge-icon {
   width: 54px;
   height: 54px;
-  background-color: #f03f3b;
+  background-color: var(--color-primary);
   fill: #fbfbfb;
   border-radius: 15px;
   display: flex;
