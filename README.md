@@ -6,9 +6,9 @@ A modern, fully responsive web application designed to connect families with pro
 
 ## 📸 App Preview
 <p align="center">
-  <img src="(https://github.com/user-attachments/assets/e498f3a7-6575-444f-8e70-da6425721cd2)" alt="Catalog Preview" width="700" />
+  <img src="https://github.com/user-attachments/assets/4ad0c9b0-a0d6-4b4c-8a0d-3936b15f3bfe" alt="Catalog Preview" width="700" />
   <br /><br />
-  <img src="https://github.com/user-attachments/assets/4ad0c9b0-a0d6-4b4c-8a0d-3936b15f3bfe" alt="Theme Switcher Preview" width="700" />
+  <img src="https://github.com/user-attachments/assets/e498f3a7-6575-444f-8e70-da6425721cd2" alt="Theme Switcher Preview" width="700" />
   <br /><br />
   <img src="https://github.com/user-attachments/assets/e86c931b-6799-469c-af9c-69a53d563973" alt="Modal Preview" width="700" />
 </p>
