@@ -7,7 +7,7 @@ import Header from "./components/Header/Header";
 import { useState, useEffect } from "react";
 import { LoginModal } from "./components/LoginModal/LoginModal";
 import RegistrationModal from "./components/RegistrationModal/RegistrationModal";
-import LogoutModal from "./components/LogoutModal/LogoutModal";
+// import LogoutModal from "./components/LogoutModal/LogoutModal";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./services/firebase";
 import { Loader } from "./components/Loader/Loader";
@@ -77,7 +77,7 @@ function AppContent() {
         }}
       />
 
-      <LogoutModal
+      {/* <LogoutModal
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}
         onConfirm={async () => {
@@ -87,7 +87,7 @@ function AppContent() {
           setIsLogoutModalOpen(false);
           navigate("/");
         }}
-      />
+      /> */}
 
       <Routes>
         <Route path="/" element={<HomePage />} />
