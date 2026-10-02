@@ -15,12 +15,11 @@
 
 .appointment-modal-content {
   position: relative;
-  width: 599px;
-  max-height: 95vh;
-  height: auto;
+  width: 100%;
+  max-width: 599px;
   background-color: #fbfbfb;
   border-radius: 30px;
-  padding: 48px;
+  padding: 64px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
