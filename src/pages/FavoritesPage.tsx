@@ -4,9 +4,13 @@ import { NannyCard } from "../components/NannyCard/NannyCard";
 import { AppointmentModal } from "../components/AppointmentModal/AppointmentModal";
 import type { Nanny } from "../types/nanny";
 import "./FavoritesPage.css";
+import { getFilteredAndSortedNannies } from "../services/nannies";
+import { Filter } from "../components/Filter/Filter";
 
 export default function FavoritesPage() {
   const { favorites } = useFavoritesStore();
+
+  const [selectedFilter, setSelectedFilter] = useState("A to Z");
 
   const [selectedNanny, setSelectedNanny] = useState<Nanny | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,20 +25,34 @@ export default function FavoritesPage() {
     setSelectedNanny(null);
   };
 
+  const filteredFavorites = getFilteredAndSortedNannies(
+    favorites,
+    selectedFilter,
+  );
+
   return (
     <div className="favorites-page">
       {favorites.length === 0 ? (
         <p className="no-favorites-text">No favorite nannies yet.</p>
       ) : (
-        <ul className="nannies-list">
-          {favorites.map((nanny) => (
-            <NannyCard
-              key={nanny.id}
-              nanny={nanny}
-              onOpenAppointment={() => handleOpenAppointment(nanny)}
+        <>
+          <div className="nannies-header-section">
+            <Filter
+              selectedFilter={selectedFilter}
+              onSelectFilter={setSelectedFilter}
             />
-          ))}
-        </ul>
+          </div>
+
+          <ul className="nannies-list">
+            {filteredFavorites.map((nanny) => (
+              <NannyCard
+                key={nanny.id}
+                nanny={nanny}
+                onOpenAppointment={() => handleOpenAppointment(nanny)}
+              />
+            ))}
+          </ul>
+        </>
       )}
 
       {isModalOpen && selectedNanny && (
