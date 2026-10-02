@@ -256,7 +256,7 @@
 
 .btn-register:hover,
 .btn-register:focus {
-  color: --color-primary;
+  color: var(--color-primary);
   background-color: #fbfbfb;
 }
 
