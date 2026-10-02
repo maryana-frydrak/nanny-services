@@ -7,7 +7,7 @@ import Header from "./components/Header/Header";
 import { useState, useEffect } from "react";
 import { LoginModal } from "./components/LoginModal/LoginModal";
 import RegistrationModal from "./components/RegistrationModal/RegistrationModal";
-import LogoutModal from "./components/LogoutModalTemp/LogoutModal";
+import LogoutModal from "./components/LogoutModal/LogoutModal";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./services/firebase";
 import { Loader } from "./components/Loader/Loader";
