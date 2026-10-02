@@ -5,6 +5,7 @@ A modern, fully responsive web application designed to connect families with pro
 ---
 
 ## 📸 App Preview
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/4ad0c9b0-a0d6-4b4c-8a0d-3936b15f3bfe" alt="Catalog Preview" width="700" />
   <br /><br />
@@ -44,12 +45,12 @@ To run this project locally on your machine, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/maryana-frydrak/your-repo-name.git](https://github.com/maryana-frydrak/your-repo-name.git)
+   git clone [https://github.com/maryana-frydrak/nanny-services](https://github.com/maryana-frydrak/nanny-services)
    Navigate to the project directory:
    ```
 
 Bash
-cd your-repo-name
+cd nanny-services
 Install dependencies:
 
 Bash
@@ -58,7 +59,7 @@ Run the development server:
 
 Bash
 npm run dev
-Open http://localhost:3000 in your browser to view the application.
+Open [http://localhost:5173](http://localhost:5173) in your browser to view the application.
 
 ✅ Checklist & Technical Criteria Compliance
 [x] Pixel-perfect layout accuracy matching design guidelines.
@@ -67,7 +68,9 @@ Open http://localhost:3000 in your browser to view the application.
 
 [x] Responsive navigation and dynamic routing (Home, Nannies, Favorites).
 
-[x] Fully functional authentication state handling (Logged in / Logged out).
+[x] Fully functional user registration and login workflows.
+
+[x] Correct session state handling (Logged in / Logged out).
 
 [x] Interactive theme switcher with persistent settings.
 
