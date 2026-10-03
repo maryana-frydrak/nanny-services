@@ -4,7 +4,7 @@
   min-height: calc(100vh - 88px);
 }
 
-.container {
+.nannies-page-container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 128px;

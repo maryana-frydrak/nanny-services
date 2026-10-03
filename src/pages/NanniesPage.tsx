@@ -13,7 +13,6 @@ export default function NanniesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  //const [isOpen, setIsOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("A to Z");
 
   const [visibleCount, setVisibleCount] = useState(3);
@@ -49,93 +48,21 @@ export default function NanniesPage() {
     loadData();
   }, []);
 
-  // const handleSelect = (option: string) => {
-  //   setSelectedFilter(option);
-  //   setIsOpen(false);
-  // };
-
   const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + 3);
   };
-
-  // const getFilteredAndSortedNannies = () => {
-  //   let result = [...nannies];
-
-  //   switch (selectedFilter) {
-  //     case "A to Z":
-  //       result.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-  //       break;
-  //     case "Z to A":
-  //       result.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
-  //       break;
-  //     case "Less than 10$":
-  //       result = result.filter((nanny) => nanny.price_per_hour < 10);
-  //       break;
-  //     case "Greater than 10$":
-  //       result = result.filter((nanny) => nanny.price_per_hour > 10);
-  //       break;
-  //     case "Popular":
-  //       result.sort((a, b) => b.rating - a.rating);
-  //       break;
-  //     case "Not popular":
-  //       result.sort((a, b) => a.rating - b.rating);
-  //       break;
-  //     case "Show all":
-  //     default:
-  //       break;
-  //   }
-
-  //   return result;
-  // };
-
-  // const filteredNannies = getFilteredAndSortedNannies();
 
   const filteredNannies = getFilteredAndSortedNannies(nannies, selectedFilter);
 
   return (
     <main className="nannies-page">
-      <div className="container">
+      <div className="nannies-page-container">
         <div className="nannies-header-section">
           <Filter
             selectedFilter={selectedFilter}
             onSelectFilter={setSelectedFilter}
           />
         </div>
-
-        {/* <div className="filter-container">
-            <span className="filter-label">Filters</span>
-            <div className="filter-dropdown-wrapper">
-              <button
-                type="button"
-                className="filter-dropdown-toggle"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                <span>{selectedFilter}</span>
-                <svg className="filter-dropdown-icon" width="20" height="20">
-                  <use href="/icons.svg#icon-chevron-down" />
-                </svg>
-              </button>
-
-              {isOpen && (
-                <ul className="filter-dropdown-list">
-                  <li onClick={() => handleSelect("A to Z")}>A to Z</li>
-                  <li onClick={() => handleSelect("Z to A")}>Z to A</li>
-                  <li onClick={() => handleSelect("Less than 10$")}>
-                    Less than 10$
-                  </li>
-                  <li onClick={() => handleSelect("Greater than 10$")}>
-                    Greater than 10$
-                  </li>
-                  <li onClick={() => handleSelect("Popular")}>Popular</li>
-                  <li onClick={() => handleSelect("Not popular")}>
-                    Not popular
-                  </li>
-                  <li onClick={() => handleSelect("Show all")}>Show all</li>
-                </ul>
-              )}
-            </div>
-          </div>
-        </div> */}
 
         <div className="nannies-content">
           {loading ? (
