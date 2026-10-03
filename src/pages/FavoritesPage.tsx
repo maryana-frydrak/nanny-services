@@ -32,32 +32,32 @@ export default function FavoritesPage() {
 
   return (
     <div className="favorites-page">
-      {favorites.length === 0 ? (
-        <p className="no-favorites-text">No favorite nannies yet.</p>
-      ) : (
-        <>
-          <div className="nannies-header-section">
-            <Filter
-              selectedFilter={selectedFilter}
-              onSelectFilter={setSelectedFilter}
-            />
-          </div>
-
-          <ul className="nannies-list">
-            {filteredFavorites.map((nanny) => (
-              <NannyCard
-                key={nanny.id}
-                nanny={nanny}
-                onOpenAppointment={() => handleOpenAppointment(nanny)}
+      <div className="favorites-page-container">
+        {favorites.length === 0 ? (
+          <p className="no-favorites-text">No favorite nannies yet.</p>
+        ) : (
+          <>
+            <div className="nannies-header-section">
+              <Filter
+                selectedFilter={selectedFilter}
+                onSelectFilter={setSelectedFilter}
               />
-            ))}
-          </ul>
-        </>
-      )}
-
-      {isModalOpen && selectedNanny && (
-        <AppointmentModal nanny={selectedNanny} onClose={handleCloseModal} />
-      )}
+            </div>
+            <ul className="nannies-list">
+              {filteredFavorites.map((nanny) => (
+                <NannyCard
+                  key={nanny.id}
+                  nanny={nanny}
+                  onOpenAppointment={() => handleOpenAppointment(nanny)}
+                />
+              ))}
+            </ul>
+          </>
+        )}
+        {isModalOpen && selectedNanny && (
+          <AppointmentModal nanny={selectedNanny} onClose={handleCloseModal} />
+        )}
+      </div>
     </div>
   );
 }
