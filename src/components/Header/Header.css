@@ -121,6 +121,12 @@
 
 .theme-toggle-btn:hover,
 .theme-toggle-btn:focus {
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.header.inner .theme-toggle-btn:hover,
+.header.inner .theme-toggle-btn:focus {
   background-color: #fbfbfb;
   color: var(--color-primary);
 }
@@ -247,11 +253,21 @@
   border: 1px solid var(--color-primary);
 }
 
+.header.inner .btn-login:hover,
+.header.inner .btn-login:focus {
+  color: var(--color-primary);
+  background-color: #fbfbfb;
+}
+
 .btn-register {
   background-color: var(--color-primary);
   border: none;
   width: 168px;
   height: 48px;
+}
+
+.header.inner .btn-register {
+  border: 1px solid rgba(251, 251, 251, 0.4);
 }
 
 .btn-register:hover,

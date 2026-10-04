@@ -13,15 +13,12 @@ export default function HomePage() {
             <svg className="icon-up-right" width="14" height="16">
               <use href="/icons.svg#icon-arrow-up-right" />
             </svg>
-            <svg className="icon-right" width="16" height="16">
-              <use href="/icons.svg#icon-arrow-right" />
-            </svg>
           </Link>
         </div>
         <div className="hero-image-container">
           <div className="hero-badge">
             <div className="badge-icon">
-              <svg width="30" height="30">
+              <svg className="icon-check" width="30" height="30">
                 <use href="/icons.svg#icon-check" />
               </svg>
             </div>
