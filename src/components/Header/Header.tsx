@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./Header.css";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Palette } from "lucide-react";
+import { Menu, Palette } from "lucide-react";
 
 interface HeaderProps {
   isLoggedIn: boolean;
@@ -22,6 +22,7 @@ export default function Header({
   const isHome = location.pathname === "/";
 
   const [isThemeOpen, setIsThemeOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const themeDropdownRef = useRef<HTMLDivElement>(null);
 
   const changeTheme = (themeName: string) => {
@@ -29,6 +30,10 @@ export default function Header({
     localStorage.setItem("app-theme", themeName);
     setIsThemeOpen(false);
   };
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -49,7 +54,7 @@ export default function Header({
         Nanny.Services
       </Link>
 
-      <div className="header-right">
+      <div className={`header-right ${isMobileMenuOpen ? "open" : ""}`}>
         <nav className="header-nav">
           <NavLink
             to="/"
@@ -141,6 +146,21 @@ export default function Header({
           )}
         </div>
       </div>
+
+      <button
+        type="button"
+        className="burger-menu-btn"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label="Toggle mobile menu"
+      >
+        {isMobileMenuOpen ? (
+          <svg width="24" height="24" className="burger-close-btn">
+            <use href="/icons.svg#icon-close" />
+          </svg>
+        ) : (
+          <Menu size={24} />
+        )}
+      </button>
     </header>
   );
 }
