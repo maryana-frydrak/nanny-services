@@ -76,10 +76,14 @@ Open [http://localhost:5173](http://localhost:5173) in your browser to view the 
 
 [x] Clean, semantic HTML and component-based architecture.
 
+[x] Interactive theme switcher with persistent settings (custom feature extending the original design).
+
+[x] Fully responsive adaptation for mobile, tablet, and desktop screens with fluid typography.
+
 👨‍💻 Author
 Mariana Frydrak
 
 GitHub: @maryana-frydrak
 
-🌐 Live Demo
-Nanny.Services Live Preview
+🌐 Live Demo: [Nanny.Services Live Preview](https://nanny-services-rho.vercel.app)
+🎨 Design: [Figma Layout](https://www.figma.com/design/u36ajEOsnwio2GDGiabVPD/Nanny-Sevices)
