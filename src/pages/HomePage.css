@@ -16,7 +16,7 @@
   width: 100%;
   background-color: var(--color-primary);
   color: #ffffff;
-  padding: 40px 20px;
+  padding: 60px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +30,8 @@
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: #fbfbfb;
-  margin-bottom: 20px;
+  margin: 0;
+  padding: 40px 20px;
 }
 
 .hero-content p {
