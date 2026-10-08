@@ -23,7 +23,7 @@ type LoginFormData = yup.InferType<typeof schema>;
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLogin: () => void;
+  onLogin: (name: string) => void;
 }
 
 export const LoginModal: React.FC<LoginModalProps> = ({
@@ -64,8 +64,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const onSubmit = async (data: LoginFormData) => {
     try {
       setAuthError(null);
-      await loginUser(data.email, data.password);
-      onLogin();
+      const user = await loginUser(data.email, data.password);
+
+      const userName = user.displayName || user.email?.split("@")[0] || "User";
+
+      onLogin(userName);
       reset();
       onClose();
     } catch (err: unknown) {

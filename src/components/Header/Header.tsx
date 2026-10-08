@@ -36,16 +36,18 @@ export default function Header({
   }, [location.pathname]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
       if (
-        themeDropdownRef.current &&
-        !themeDropdownRef.current.contains(event.target as Node)
+        !target.closest(".theme-dropdown-container") &&
+        !target.closest(".mobile-theme-container")
       ) {
         setIsThemeOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    document.addEventListener("click", handleDocumentClick);
+    return () => document.removeEventListener("click", handleDocumentClick);
   }, []);
 
   return (
@@ -164,7 +166,7 @@ export default function Header({
             onClick={() => setIsMobileMenuOpen(false)}
             aria-label="Close mobile menu"
           >
-            <svg width="24" height="24" className="burger-close-icon">
+            <svg width="24" height="24" className="mobile-menu-close-icon">
               <use href="/icons.svg#icon-close" />
             </svg>
           </button>
