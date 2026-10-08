@@ -58,9 +58,9 @@ function AppContent() {
       <LoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
-        onLogin={() => {
+        onLogin={(name) => {
           setIsLoggedIn(true);
-          setUserName("User");
+          setUserName(name);
           setIsLoginModalOpen(false);
           navigate("/nannies");
         }}
