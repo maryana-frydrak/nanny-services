@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 42px 44px 18px 44px;
+  padding: 42px clamp(20px, 8vw, 80px) 18px clamp(20px, 8vw, 80px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -327,10 +327,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .header {
-    padding: 48px 84px 20px 84px;
-  }
-
   .burger-btn,
   .mobile-menu {
     display: none;
@@ -348,7 +344,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+
+    gap: clamp(12px, 2vw, 24px);
   }
 
   .header.inner .header-right {
@@ -563,6 +560,10 @@
 @media screen and (min-width: 1440px) {
   .header {
     padding: 52px 128px 20px 128px;
+  }
+
+  .header.home .header-right {
+    gap: clamp(24px, 3vw, 32px);
   }
 
   .header.home .header-nav {
