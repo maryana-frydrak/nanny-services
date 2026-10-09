@@ -54,9 +54,10 @@
 .mobile-menu {
   position: fixed;
   inset: 0;
-  width: 100vh;
+  width: 100vw;
   height: 100vh;
   background-color: var(--color-primary);
+  border-radius: 30px;
   z-index: 999;
 
   opacity: 0;
@@ -99,6 +100,7 @@
   background-color: transparent;
   border: none;
   padding: 0;
+  z-index: 10;
 
   transition: opacity 0.2s ease;
 }
@@ -238,7 +240,7 @@
 }
 
 .mobile-user-menu .user-avatar-wrapper:hover,
-.mobile-user-menu .user-avatar-wrapper:hover {
+.mobile-user-menu .user-avatar-wrapper:focus {
   fill: #fbfbfb;
   background-color: transparent;
   border: 1px solid rgba(251, 251, 251, 0.4);
@@ -257,7 +259,7 @@
 }
 
 .mobile-user-menu .user-name:hover,
-.mobile-user-menu .user-name:hover {
+.mobile-user-menu .user-name:focus {
   opacity: 0.8;
 }
 
@@ -317,16 +319,17 @@
   height: 48px;
 }
 
-.btn-logout:hover,
-.btn-logout:focus {
+.header.inner .btn-logout:hover,
+.header.inner .btn-logout:focus {
   background-color: #fbfbfb;
   color: var(--color-primary);
 }
+
 .header-right {
   display: none;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
   .burger-btn,
   .mobile-menu {
     display: none;
@@ -508,6 +511,25 @@
     margin-right: 14px;
   }
 
+  .user-avatar-wrapper:hover,
+  .user-avatar-wrapper:focus {
+    fill: #fbfbfb;
+    background-color: transparent;
+    border: 1px solid rgba(251, 251, 251, 0.4);
+  }
+
+  .header.home .user-avatar-wrapper {
+    fill: #fbfbfb;
+    background-color: transparent;
+    border: 1px solid rgba(251, 251, 251, 0.4);
+  }
+
+  .header.home .user-avatar-wrapper:hover,
+  .header.home .user-avatar-wrapper:focus {
+    fill: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+
   .user-name {
     font-weight: 500;
     font-size: 18px;
@@ -517,6 +539,11 @@
     color: #fbfbfb;
 
     margin-right: 24px;
+  }
+
+  .user-name:hover,
+  .user-name:hover {
+    opacity: 0.8;
   }
 
   .auth-buttons {
@@ -553,7 +580,15 @@
   }
 
   .btn-logout {
-    width: 134px;
+    padding: 14px 34px;
+    width: 124px;
+    height: 42px;
+  }
+
+  .header.home .btn-logout:hover,
+  .header.home .btn-logout:focus {
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
   }
 }
 
@@ -602,6 +637,12 @@
 
   .btn-register {
     width: 168px;
+    height: 48px;
+  }
+
+  .btn-logout {
+    padding: 14px 39px;
+    width: 134px;
     height: 48px;
   }
 }
