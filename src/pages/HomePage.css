@@ -16,7 +16,8 @@
   width: 100%;
   background-color: var(--color-primary);
   color: #ffffff;
-  padding: 60px 0;
+  padding: 70px calc(clamp(20px, 8vw, 80px) - 16px) 60px
+    calc(clamp(20px, 8vw, 80px) - 16px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,8 +31,8 @@
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: #fbfbfb;
-  margin: 0;
-  padding: 40px 20px;
+  margin-bottom: 20px;
+  padding: 0;
 }
 
 .hero-content p {
@@ -81,14 +82,13 @@
 
 .hero-button:hover .icon-up-right,
 .hero-button:focus .icon-up-right {
-  background-color: #fbfbfb;
   fill: var(--color-primary);
   transform: rotate(53deg);
 }
 
 .hero-image-container {
   width: 100%;
-  min-height: 320px;
+  min-height: 380px;
   background-image: url("../images/hero-baby.jpg");
   background-size: cover;
   background-position: center;
@@ -157,19 +157,18 @@
   }
 
   .hero-section {
-    flex-direction: row;
     border-radius: 25px;
   }
 
   .hero-content {
-    padding: 60px 40px;
+    padding: 60px 40px 60px calc(clamp(20px, 8vw, 80px) - 24px);
     align-items: flex-start;
     text-align: left;
   }
 
   .hero-content h1 {
-    font-size: 50px;
-    line-height: 1.05;
+    font-size: 46px;
+    line-height: 1.1;
   }
 
   .hero-content p {
@@ -177,16 +176,16 @@
   }
 
   .hero-image-container {
-    min-height: 450px;
+    min-height: 400px;
   }
 
   .hero-badge {
-    bottom: 40px;
-    right: 40px;
+    bottom: 30px;
+    right: 30px;
     left: auto;
     transform: none;
-    padding: 24px;
-    gap: 20px;
+    padding: 18px 20px;
+    gap: 16px;
     max-width: none;
   }
 
@@ -212,24 +211,79 @@
   }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1024px) {
   .home-container {
     padding: 32px;
   }
 
   .hero-section {
+    flex-direction: row;
     border-radius: 30px;
   }
 
   .hero-content {
-    width: 50%;
+    width: 48%;
+    padding: 140px 42px 140px calc(clamp(20px, 8vw, 80px) - 32px);
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero-content h1 {
+    font-size: 60px;
+    line-height: 1.05;
+    margin-bottom: 28px;
+  }
+
+  .hero-content p {
+    font-size: 20px;
+    line-height: 1.3;
+    margin-bottom: 48px;
+  }
+
+  .hero-image-container {
+    width: 52%;
+    min-height: auto;
+  }
+
+  .hero-badge {
+    bottom: 50px;
+    right: 50px;
+    padding: 24px;
+    border-radius: 20px;
+    gap: 28px;
+  }
+
+  .badge-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 15px;
+    font-size: 20px;
+  }
+
+  .icon-check {
+    width: 30px;
+    height: 30px;
+  }
+
+  .badge-title {
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .badge-count {
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .hero-content {
     padding: 251px 64px 163px 96px;
   }
 
   .hero-content h1 {
     font-size: 70px;
     line-height: 1;
-    margin-bottom: 28px;
   }
 
   .hero-content p {
@@ -242,38 +296,15 @@
     width: 230px;
   }
 
-  .hero-image-container {
-    width: 50%;
-    min-height: auto;
-  }
-
   .hero-badge {
-    bottom: 50px;
-    right: 50px;
     padding: 32px;
-    border-radius: 20px;
-    gap: 28px;
   }
 
   .badge-icon {
-    width: 54px;
-    height: 54px;
-    border-radius: 15px;
     font-size: 24px;
-  }
-
-  .icon-check {
-    width: 30px;
-    height: 30px;
   }
 
   .badge-title {
-    font-weight: 400;
     font-size: 16px;
-    margin-bottom: 6px;
-  }
-
-  .badge-count {
-    font-size: 24px;
   }
 }
