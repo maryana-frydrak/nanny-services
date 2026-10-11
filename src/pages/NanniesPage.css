@@ -1,4 +1,66 @@
 .nannies-page {
+  padding: 40px 0 64px 0;
+  background-color: #f3f3f3;
+  min-height: calc(100vh - 88px);
+}
+
+.nannies-page-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  /* Синхронізуємо відступи з хедером для всіх екранів */
+  padding: 0 clamp(20px, 8vw, 80px);
+}
+
+.nannies-header-section {
+  margin-bottom: 32px;
+}
+
+.nannies-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nannies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.load-more-btn {
+  margin: 64px auto 0 auto;
+  padding: 14px 40px;
+  background-color: var(--color-primary);
+  color: #fbfbfb;
+  border: none;
+  border-radius: 30px;
+
+  width: 159px;
+  height: 48px;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.load-more-btn:hover,
+.load-more-btn:focus {
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 1440px) {
+  .nannies-page-container {
+    padding: 0 128px;
+  }
+}
+
+/* .nannies-page {
   padding: 64px 0;
   background-color: #f3f3f3;
   min-height: calc(100vh - 88px);
@@ -50,4 +112,4 @@
 .load-more-btn:hover,
 .load-more-btn:focus {
   opacity: 0.8;
-}
+} */
