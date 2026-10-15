@@ -1,6 +1,6 @@
 import React from "react";
 import "./LogoutModal.css";
-import "../AuthModals.css";
+import "../AuthModals/AuthModals.css";
 
 interface LogoutModalProps {
   isOpen: boolean;
