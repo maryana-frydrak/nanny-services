@@ -12,19 +12,21 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
 }) => {
   return (
     <div className="error-container">
-      <p className="error-message-text">{message}</p>
-      {onRetry && (
-        <button
-          className="error-retry-btn"
-          onClick={() => {
-            if (onRetry) {
-              onRetry();
-            }
-          }}
-        >
-          Try again
-        </button>
-      )}
+      <div className="error-content-box">
+        <p className="error-message-text">{message}</p>
+        {onRetry && (
+          <button
+            className="error-retry-btn"
+            onClick={() => {
+              if (onRetry) {
+                onRetry();
+              }
+            }}
+          >
+            Try again
+          </button>
+        )}
+      </div>
     </div>
   );
 };

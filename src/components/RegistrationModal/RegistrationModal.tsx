@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { registerUser } from "../../services/auth";
 import "./RegistrationModal.css";
+import "../AuthModals.css";
 
 interface RegistrationModalProps {
   isOpen: boolean;
@@ -97,27 +98,31 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
             )}
           </div>
 
-          <div className="input-wrapper password-wrapper">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              {...register("password")}
-            />
-            <button
-              type="button"
-              className="toggle-password-btn"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              <svg width="20" height="20">
-                <use
-                  href={`/icons.svg#${showPassword ? "icon-eye" : "icon-eye-off"}`}
-                />
-              </svg>
-            </button>
+          <>
+            <div className="input-wrapper password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                {...register("password")}
+              />
+              <button
+                type="button"
+                className="toggle-password-btn"
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                <svg width="20" height="20">
+                  <use
+                    href={`/icons.svg#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+                  />
+                </svg>
+              </button>
+            </div>
             {errors.password && (
-              <p className="error-text">{errors.password.message}</p>
+              <p className="error-text password-error">
+                {errors.password.message}
+              </p>
             )}
-          </div>
+          </>
 
           {serverError && (
             <p className="error-text server-error">{serverError}</p>

@@ -1,4 +1,92 @@
 .error-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.error-content-box {
+  background-color: #fbfbfb;
+  padding: 40px 20px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 300px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-message-text {
+  font-weight: 500;
+  font-size: 20px;
+
+  line-height: 1.2;
+  color: #11101c;
+  margin-bottom: 20px;
+}
+
+.error-retry-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 40px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+
+  width: 139px;
+  height: 42px;
+
+  font-weight: 500;
+  font-size: 14px;
+
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
+  transition: background-color 0.2s;
+}
+
+.error-retry-btn:hover,
+.error-retry-btn:focus {
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 768px) {
+  .error-content-box {
+    padding: 60px 40px;
+    border-radius: 30px;
+    max-width: 400px;
+  }
+
+  .error-message-text {
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .error-retry-btn {
+    border-radius: 30px;
+    width: 159px;
+    height: 48px;
+    font-size: 16px;
+  }
+}
+
+/* .error-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,4 +127,4 @@
 
 .error-retry-btn:hover {
   opacity: 0.8;
-}
+} */

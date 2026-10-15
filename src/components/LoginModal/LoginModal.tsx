@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./LoginModal.css";
+import "../AuthModals.css";
 import { loginUser } from "../../services/auth";
 import type { FirebaseErrorType } from "../../types/auth";
 
@@ -119,27 +120,31 @@ export const LoginModal: React.FC<LoginModalProps> = ({
             )}
           </div>
 
-          <div className="input-wrapper">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              {...register("password")}
-            />
-            <button
-              type="button"
-              className="toggle-password-btn"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              <svg width="20" height="20">
-                <use
-                  href={`/icons.svg#${showPassword ? "icon-eye" : "icon-eye-off"}`}
-                />
-              </svg>
-            </button>
+          <>
+            <div className="input-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                {...register("password")}
+              />
+              <button
+                type="button"
+                className="toggle-password-btn"
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                <svg width="20" height="20">
+                  <use
+                    href={`/icons.svg#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+                  />
+                </svg>
+              </button>
+            </div>
             {errors.password && (
-              <span className="error-text">{errors.password.message}</span>
+              <span className="error-text password-error">
+                {errors.password.message}
+              </span>
             )}
-          </div>
+          </>
 
           {authError && (
             <span className="error-text general-error">{authError}</span>
