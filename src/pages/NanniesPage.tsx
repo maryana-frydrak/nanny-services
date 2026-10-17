@@ -10,8 +10,8 @@ import { Filter } from "../components/Filter/Filter";
 
 export default function NanniesPage() {
   const [nannies, setNannies] = useState<Nanny[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>("");
 
   const [selectedFilter, setSelectedFilter] = useState("A to Z");
 
@@ -45,7 +45,7 @@ export default function NanniesPage() {
   };
 
   useEffect(() => {
-    loadData();
+    // loadData();
   }, []);
 
   const handleLoadMore = () => {

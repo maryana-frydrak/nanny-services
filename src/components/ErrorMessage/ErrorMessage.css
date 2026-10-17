@@ -15,6 +15,7 @@
 }
 
 .error-content-box {
+  position: relative;
   background-color: #fbfbfb;
   padding: 40px 20px;
   border-radius: 25px;
