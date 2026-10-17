@@ -10,7 +10,7 @@ import { Filter } from "../components/Filter/Filter";
 
 export default function NanniesPage() {
   const [nannies, setNannies] = useState<Nanny[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isDismissed, setIsDismissed] = useState(false);
 
@@ -52,7 +52,7 @@ export default function NanniesPage() {
   };
 
   useEffect(() => {
-    // loadData();
+    loadData();
   }, []);
 
   const handleLoadMore = () => {
