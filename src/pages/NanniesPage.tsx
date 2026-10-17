@@ -11,7 +11,13 @@ import { Filter } from "../components/Filter/Filter";
 export default function NanniesPage() {
   const [nannies, setNannies] = useState<Nanny[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>("");
+  const [error, setError] = useState<string | null>(null);
+  const [isDismissed, setIsDismissed] = useState(false);
+
+  const handleCloseError = () => {
+    setError(null);
+    setIsDismissed(true);
+  };
 
   const [selectedFilter, setSelectedFilter] = useState("A to Z");
 
@@ -34,6 +40,7 @@ export default function NanniesPage() {
     try {
       setLoading(true);
       setError(null);
+      setIsDismissed(false);
       const data = await fetchNannies();
       setNannies(data);
       console.log("Fetched nannies from Firebase:", data);
@@ -68,7 +75,11 @@ export default function NanniesPage() {
           {loading ? (
             <Loader />
           ) : error ? (
-            <ErrorMessage message={error!} onRetry={loadData} />
+            <ErrorMessage
+              message={error!}
+              onRetry={loadData}
+              onClose={handleCloseError}
+            />
           ) : filteredNannies.length > 0 ? (
             <>
               <div className="nannies-list">
@@ -91,9 +102,13 @@ export default function NanniesPage() {
                 </button>
               )}
             </>
-          ) : (
-            <ErrorMessage message="No nannies found in the database." />
-          )}
+          ) : !isDismissed ? (
+            <ErrorMessage
+              message="No nannies found in the database."
+              onRetry={loadData}
+              onClose={handleCloseError}
+            />
+          ) : null}
 
           {isModalOpen && selectedNanny && (
             <AppointmentModal
