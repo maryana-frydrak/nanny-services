@@ -6,6 +6,7 @@ import type { Nanny } from "../types/nanny";
 import "./FavoritesPage.css";
 import { getFilteredAndSortedNannies } from "../services/nannies";
 import { Filter } from "../components/Filter/Filter";
+import { Link } from "react-router-dom";
 
 export default function FavoritesPage() {
   const { favorites } = useFavoritesStore();
@@ -34,7 +35,13 @@ export default function FavoritesPage() {
     <div className="favorites-page">
       <div className="favorites-page-container">
         {favorites.length === 0 ? (
-          <p className="no-favorites-text">No favorite nannies yet.</p>
+          <div className="empty-favorites">
+            <h2 className="empty-title">You have no favorite nannies yet.</h2>
+            <p className="empty-subtitle">Choose them right now.</p>
+            <Link to="/nannies" className="go-to-nannies-btn">
+              Go to nannies
+            </Link>
+          </div>
         ) : (
           <>
             <div className="nannies-header-section">

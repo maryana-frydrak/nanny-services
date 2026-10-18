@@ -55,6 +55,10 @@ export default function NanniesPage() {
     loadData();
   }, []);
 
+  useEffect(() => {
+    setIsDismissed(false);
+  }, [selectedFilter]);
+
   const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + 3);
   };

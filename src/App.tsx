@@ -11,6 +11,7 @@ import LogoutModal from "./components/LogoutModal/LogoutModal";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./services/firebase";
 import { Loader } from "./components/Loader/Loader";
+import { useFavoritesStore } from "./store/useFavoritesStore";
 
 function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,6 +23,13 @@ function AppContent() {
 
   const navigate = useNavigate();
 
+  const loadUserFavorites = useFavoritesStore(
+    (state) => state.loadUserFavorites,
+  );
+  const clearFavoritesOnLogout = useFavoritesStore(
+    (state) => state.clearFavoritesOnLogout,
+  );
+
   useEffect(() => {
     const savedTheme = localStorage.getItem("app-theme") || "red";
     document.documentElement.setAttribute("data-theme", savedTheme);
@@ -31,9 +39,13 @@ function AppContent() {
         setIsLoggedIn(true);
 
         setUserName(user.displayName || user.email || "User");
+
+        loadUserFavorites(user.uid);
       } else {
         setIsLoggedIn(false);
         setUserName("");
+
+        clearFavoritesOnLogout();
       }
       setIsLoading(false);
     });
