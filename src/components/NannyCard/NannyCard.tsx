@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import type { Nanny } from "../../types/nanny";
 import "./NannyCard.css";
 import { useFavoritesStore } from "../../store/useFavoritesStore";
+import { auth } from "../../services/firebase";
 
 interface NannyCardProps {
   nanny: Nanny;
@@ -18,10 +19,17 @@ export const NannyCard: React.FC<NannyCardProps> = ({
   const favorite = isFavorite(nannyId);
 
   const handleFavoriteClick = () => {
+    const userId = auth.currentUser?.uid;
+
+    if (!userId) {
+      console.warn("User is not logged in!");
+      return;
+    }
+
     if (favorite) {
-      removeFavorite(nannyId);
+      removeFavorite(nannyId, userId);
     } else {
-      addFavorite(nanny);
+      addFavorite(nanny, userId);
     }
   };
 

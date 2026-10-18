@@ -5,7 +5,7 @@ import "./Loader.css";
 export const Loader: React.FC = () => {
   return (
     <div className="loader-backdrop">
-      <PacmanLoader color="#f03f3b" size={25} />
+      <PacmanLoader color="currentColor" size={25} />
     </div>
   );
 };
