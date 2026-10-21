@@ -12,6 +12,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./services/firebase";
 import { Loader } from "./components/Loader/Loader";
 import { useFavoritesStore } from "./store/useFavoritesStore";
+import { Toaster } from "react-hot-toast";
 
 function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -113,9 +114,32 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+        containerStyle={{
+          zIndex: 99999,
+          marginBottom: "60px",
+        }}
+        toastOptions={{
+          duration: 5000,
+          style: {
+            background: "rgba(17, 17, 17, 0.4)",
+            color: "#fff",
+            borderRadius: "12px",
+            padding: "12px 20px",
+            fontSize: "18px",
+            fontWeight: "600",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
+          },
+        }}
+      />
+    </>
   );
 }
 

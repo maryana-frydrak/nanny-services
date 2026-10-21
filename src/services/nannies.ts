@@ -60,11 +60,11 @@ export const getFilteredAndSortedNannies = (
     case "Z to A":
       result.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
       break;
-    case "Less than 10$":
-      result = result.filter((nanny) => nanny.price_per_hour < 10);
+    case "Price: Low to High":
+      result.sort((a, b) => a.price_per_hour - b.price_per_hour);
       break;
-    case "Greater than 10$":
-      result = result.filter((nanny) => nanny.price_per_hour > 10);
+    case "Price: High to Low":
+      result.sort((a, b) => b.price_per_hour - a.price_per_hour);
       break;
     case "Popular":
       result.sort((a, b) => b.rating - a.rating);

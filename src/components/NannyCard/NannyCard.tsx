@@ -3,9 +3,12 @@ import type { Nanny } from "../../types/nanny";
 import "./NannyCard.css";
 import { useFavoritesStore } from "../../store/useFavoritesStore";
 import { auth } from "../../services/firebase";
+import toast from "react-hot-toast";
 
 interface NannyCardProps {
   nanny: Nanny;
+  isLoggedIn?: boolean;
+  favorite?: boolean;
   onOpenAppointment: () => void;
 }
 
@@ -22,7 +25,7 @@ export const NannyCard: React.FC<NannyCardProps> = ({
     const userId = auth.currentUser?.uid;
 
     if (!userId) {
-      console.warn("User is not logged in!");
+      toast.error("This functionality is available only for authorized users!");
       return;
     }
 

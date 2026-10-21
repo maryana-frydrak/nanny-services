@@ -26,8 +26,8 @@ export const Filter = ({ selectedFilter, onSelectFilter }: FilterProps) => {
   const options = [
     "A to Z",
     "Z to A",
-    "Less than 10$",
-    "Greater than 10$",
+    "Price: Low to High",
+    "Price: High to Low",
     "Popular",
     "Not popular",
     "Show all",
